@@ -22,9 +22,9 @@ public:
             str[index] += 32;
          }
       }
-      return str;
    }
-
+   
+   // Метод сравнения двух строк
    bool Equals(string str_1, string str_2)
    {
       if (ToLower(str_1) == ToLower(str_2))
@@ -34,7 +34,7 @@ public:
 
    // В данном случае решаю проблему при которой,
    // если отсутствует нулевой символ, то работа со строкой может возвращать нкорректный результат
-   string Str(string str)
+   string AppendZeroSymbol(string str)
    {
       self = str;
 
@@ -73,8 +73,8 @@ int main()
    // Поскольку стандартный метод ввода не позволяет считать строку с пробелами
    getline(cin, inputString);
 
-   // Полученную строку помещаю в пользоватльский тип для работы со строками
-   userString.Str(inputString);
+   // Добавляю в конец строки нулевой символ
+   userString.AppendZeroSymbol(inputString);
 
    return 0;
 }
