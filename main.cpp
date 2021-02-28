@@ -1,30 +1,80 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
+#include <stdio.h>
 #include <string.h>
+#include <string.h>
+
+using namespace std;
+
+class UserString : string
+{
+private:
+   // Строка введенная пользователем
+   string self;
+
+public:
+   // Метод для преобразования букв к нижнему регистру
+   string ToLower(string str)
+   {
+      for (int index = 0; index < str.length(); index++)
+      {
+         if ((int)str[index] > 64 && (int)str[index] < 91)
+         {
+            str[index] += 32;
+         }
+      }
+      return str;
+   }
+
+   bool Equals(string str_1, string str_2)
+   {
+      if (ToLower(str_1) == ToLower(str_2))
+         return true;
+      return false;
+   }
+
+   // В данном случае решаю проблему при которой,
+   // если отсутствует нулевой символ, то работа со строкой может возвращать нкорректный результат
+   string Str(string str)
+   {
+      self = str;
+
+      // записываю нулевой символ в конец строки
+      self.push_back('\0');
+
+      return self;
+   }
+
+   // Вернуть длину строки
+   int Lenght()
+   {
+      return self.length();
+   }
+
+};
 
 int main()
 {
-    int const sizeArray = 1000;
+   // веденная пользователем строка
+   string inputString;
 
-    char *arrayInputString = new char[sizeArray];
-    std::cout << "Пожалуйста, введите фигуру и ее координаты в формате: <Название фигуры>(координата Х координата Y, радиус) \n";
+   // Строка для обработки
+   UserString userString;
 
-    std::fgets(arrayInputString, sizeArray, stdin );
-  
-    std::cout << arrayInputString;
+   // Размерность массива с ключевыми словами
+   int sizeArrayKeyWords = 3;
 
-    for (int i = 0; i < strlen(arrayInputString) - 1; i++)
-    {
-      if(((int)arrayInputString[i] > 64 && (int)arrayInputString[i] < 91) || ((int)arrayInputString[i] > 96 && (int)arrayInputString[i] < 123 ))
-      {
-        printf("Yes - %c - %d : ", arrayInputString[i] , (int)arrayInputString[i] );
-      }
-      else
-        printf("No - %c - %d : ", arrayInputString[i] , (int)arrayInputString[i] );
-    }
-    
+   // Массив с ключевыми словами
+   string arrayKeyWords[sizeArrayKeyWords] = {"circle", "triangle", "polygon"};
 
-    return 0;
+   // Хранит индекс строки
+   int indexStr = 0;
 
+   // Считываем строку введенную пользователем с пробелами и переносами строк.
+   // Поскольку стандартный метод ввода не позволяет считать строку с пробелами
+   getline(cin, inputString);
+
+   // Полученную строку помещаю в пользоватльский тип для работы со строками
+   userString.Str(inputString);
+
+   return 0;
 }
