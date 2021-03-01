@@ -80,6 +80,14 @@ public:
         return false;
     }
 
+    // Если сивол - цифра
+    bool IsDigitalSymbol(int index)
+    {
+        if ((int)self[index] > 47 && (int)self[index] < 59)
+            return true;
+        return false;
+    }
+
     // Проверка на пробел
     // Если пробел - true, если нет то false
     bool IsSpaceSymbol(int index)
@@ -104,26 +112,30 @@ public:
     {
         /// Завершаемым символом конструкции должна быть закрытая круглая скобка
         // Если скобка отсутствует, то укажем на ошибку
-        return self[index] == ')'? true : false;
+        return self[index] == ')' ? true : false;
     }
 
-    // Метод для работы с Кругом
-    // Я уже не знаю как это правильно назвать....
-    // как эта хрень может называться...
-    /// Проверка нотификации? или что-то типа того
-    // проверка синтаксиса. я короче уже ХЗ. Сам придумай )))))))))
-    void NonameFunctionForWorkCircle(UserString str, int indexStr)
+    // Метод ищет цифру
+    bool FindDigital(int index)
     {
         // Если прошли все прошлые проверки, то теперь
         // ищем первое число затем еще одно число через пробел, и
         // уже потом запятую и снова число.
 
         // Ищем первую цифру.
-        for (int i = indexStr; i < str.Lenght(); i++) {
-            // if () {
-            // }
+        for (int i = index; i < self.length(); i++) {
+            
+            if (!IsSpaceSymbol(i)) {
+                if (IsDigitalSymbol(i))
+
+                    return true;
+                return false;
+            }
+            else {
+            }
         }
-    };
+        return false;
+    }
 };
 
 int main()
@@ -143,18 +155,19 @@ int main()
     // Хранит индекс строки
     int indexStr = 0;
 
-    // Считываем строку введенную пользователем с пробелами и переносами строк.
-    // Поскольку стандартный метод ввода не позволяет считать строку с пробелами
+    // Считываем строку введенную пользователем с пробелами и переносами
+    // строк. Поскольку стандартный метод ввода не позволяет считать
+    // строку с пробелами
     getline(cin, inputString);
 
     // Добавляю в конец строки нулевой символ
     userString.AppendZeroSymbol(inputString);
 
-    /// По своеобразной логике было решено, проверить сначала ключевое слово
-    /// В данном случае circle || triangle || polygon
-    /// Для этого будем считать, что любой символ кроме заглавных и строчных
-    /// литералов будет являться ограничителем для проверки введеного ключевого
-    /// слова
+    /// По своеобразной логике было решено, проверить сначала ключевое
+    /// слово В данном случае circle || triangle || polygon Для этого
+    /// будем считать, что любой символ кроме заглавных и строчных
+    /// литералов будет являться ограничителем для проверки введеного
+    /// ключевого слова
     for (int i = 0; i < userString.Lenght(); i++) {
         // Если получили символ отличный от буквы
         if (userString.IsNotLetter(i)) {
@@ -175,7 +188,13 @@ int main()
     case 0: // Круг
 
         if (userString.IsOpenParenthesis(indexStr)) {
-            userString.NonameFunctionForWorkCircle(userString, 0);
+ 
+            if (userString.FindDigital(indexStr + 1)) {
+                cout << "Digital";
+            } else {
+                cout << "NotDigital";
+            }
+
         } else {
             cout << "Символ #" << indexStr + 1 << " должен быть - ( \n";
         }
