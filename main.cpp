@@ -10,6 +10,9 @@ private:
     string stringInputUser;
 
 public:
+    // Хранит индекс строки
+    int indexStr = 0;
+
     // Метод для преобразования букв к нижнему регистру
     string ToLower(string str)
     {
@@ -22,6 +25,26 @@ public:
         return str;
     }
 
+    // Метод ищет (пусть ищет) ключевое слово
+    void FindKeyWord()
+    {
+        /// По своеобразной логике было решено, проверить сначала ключевое
+        /// слово В данном случае circle || triangle || polygon Для этого
+        /// будем считать, что любой символ кроме заглавных и строчных
+        /// литералов будет являться ограничителем для проверки введеного
+        /// ключевого слова
+        for (int i = 0; i < stringInputUser.length(); i++) {
+            // Если получили символ отличный от буквы
+            if (IsNotLetter(i)) {
+                // Запоминаем индекс, на котором остановились
+                indexStr = i;
+
+                // И выходим из цикла
+                break;
+            }
+        }
+    }
+
     // Метод сравнения двух строк
     bool Equals(string str_1, string str_2)
     {
@@ -30,17 +53,19 @@ public:
         return false;
     }
 
+    // Метод устанавливает в поле stringInputUser введную строку пользователя
+    void SetString(string str)
+    {
+        stringInputUser = str;
+    }
+
     // В данном случае решаю проблему при которой,
     // если отсутствует нулевой символ, то работа со строкой может возвращать
     // нкорректный результат
-    string AppendZeroSymbol(string str)
+    void AppendZeroSymbol()
     {
-        stringInputUser = str;
-
         // записываю нулевой символ в конец строки
         stringInputUser.push_back('\0');
-
-        return stringInputUser;
     }
 
     // Вернуть длину строки
@@ -56,12 +81,12 @@ public:
     }
 
     // Метод возвращающий индекс элемента массива с которым происходит сравнение
-    int RetunIndexArrayCompare(string array[], int sizeArray, string str)
+    int RetunIndexArrayCompare(string array[], int sizeArray)
     {
         int index = -1;
 
         for (int i = 0; i < sizeArray; i++) {
-            if (this->Equals(array[i], str)) {
+            if (this->Equals(array[i], stringInputUser.substr(0, indexStr))) { 
                 index = i;
             }
         }
@@ -73,8 +98,10 @@ public:
     bool IsNotLetter(int index)
     {
         // Если символ отличный от буквы
-        if (((int)stringInputUser[index] > 91 && (int)stringInputUser[index] < 96)
-            || (int)stringInputUser[index] < 64 || (int)stringInputUser[index] > 123)
+        if (((int)stringInputUser[index] > 91
+             && (int)stringInputUser[index] < 96)
+            || (int)stringInputUser[index] < 64
+            || (int)stringInputUser[index] > 123)
             return true;
 
         return false;
@@ -83,7 +110,8 @@ public:
     // Если сивол - цифра
     bool IsDigitalSymbol(int index)
     {
-        if ((int)stringInputUser[index] > 47 && (int)stringInputUser[index] < 59)
+        if ((int)stringInputUser[index] > 47
+            && (int)stringInputUser[index] < 59)
             return true;
         return false;
     }
@@ -98,13 +126,13 @@ public:
     }
 
     // Функция проверки введенной открытой скобки
-    bool IsOpenParenthesis(int index)
+    bool IsOpenParenthesis()
     {
         /// Поскольку следом за ключевым словом
         /// должна следовать открытая круглая скобка,
         /// проверим ее присутствие.
         // Если скобка отсутствует, то укажем на ошибку
-        return stringInputUser[index] == '(' ? true : false;
+        return stringInputUser[indexStr] == '(' ? true : false;
     }
 
     // Функция проверки введенной открытой скобки
@@ -124,14 +152,12 @@ public:
 
         // Ищем первую цифру.
         for (int i = index; i < stringInputUser.length(); i++) {
-            
             if (!IsSpaceSymbol(i)) {
                 if (IsDigitalSymbol(i))
 
                     return true;
                 return false;
             }
-
         }
         return false;
     }
@@ -151,68 +177,53 @@ int main()
     // Массив с ключевыми словами
     string arrayKeyWords[sizeArrayKeyWords] = {"circle", "triangle", "polygon"};
 
-    // Хранит индекс строки
-    int indexStr = 0;
-
     // Считываем строку введенную пользователем с пробелами и переносами
     // строк. Поскольку стандартный метод ввода не позволяет считать
     // строку с пробелами
     getline(cin, inputString);
 
+    // Задаю строку
+    userString.SetString(inputString);
+
     // Добавляю в конец строки нулевой символ
-    userString.AppendZeroSymbol(inputString);
+    userString.AppendZeroSymbol();
 
-    /// По своеобразной логике было решено, проверить сначала ключевое
-    /// слово В данном случае circle || triangle || polygon Для этого
-    /// будем считать, что любой символ кроме заглавных и строчных
-    /// литералов будет являться ограничителем для проверки введеного
-    /// ключевого слова
-    for (int i = 0; i < userString.Lenght(); i++) {
-        // Если получили символ отличный от буквы
-        if (userString.IsNotLetter(i)) {
-            // Запоминаем индекс, на котором остановились
-            indexStr = i;
+    // Ищем ключевое слово
+    userString.FindKeyWord();
 
-            // И выходим из цикла
-            break;
-        }
-    }
-
-    switch (userString.RetunIndexArrayCompare(
-            arrayKeyWords, sizeArrayKeyWords, userString.SubStr(0, indexStr))) {
+    switch (userString.RetunIndexArrayCompare(arrayKeyWords, sizeArrayKeyWords)) {
     case -1: // Ввели что-то неизвестное
         cout << "ошибка";
         break;
 
     case 0: // Круг
 
-        if (userString.IsOpenParenthesis(indexStr)) {
- 
-            if (userString.FindDigital(indexStr + 1)) {
+        if (userString.IsOpenParenthesis()) {
+            if (userString.FindDigital(userString.indexStr + 1)) {
                 cout << "Digital";
             } else {
                 cout << "NotDigital";
             }
 
         } else {
-            cout << "Символ #" << indexStr + 1 << " должен быть - ( \n";
+            cout << "Символ #" << userString.indexStr + 1 << " должен быть - ( \n";
         }
 
         break;
 
     case 1: // треугольник
-        if (userString.IsOpenParenthesis(indexStr)) {
+        if (userString.IsOpenParenthesis()) {
             cout << "Скобка есть";
         } else {
-            cout << "Символ #" << indexStr + 1 << " должен быть - ( \n";
+            cout << "Символ #" << userString.indexStr + 1 << " должен быть - ( \n";
         }
         break;
 
     case 2: // Полигон
-        if (userString.IsOpenParenthesis(indexStr)) {
+        if (userString.IsOpenParenthesis()) {
             cout << "Скобка есть";
         } else {
-            cout << "Символ #" << indexStr + 1 << " должен быть - ( \n";
+            cout << "Символ #" << userString.indexStr + 1 << " должен быть - ( \n";
         }
         break;
 
