@@ -7,7 +7,7 @@ using namespace std;
 class UserString : string {
 private:
     // Строка введенная пользователем
-    string self;
+    string stringInputUser;
 
 public:
     // Метод для преобразования букв к нижнему регистру
@@ -35,24 +35,24 @@ public:
     // нкорректный результат
     string AppendZeroSymbol(string str)
     {
-        self = str;
+        stringInputUser = str;
 
         // записываю нулевой символ в конец строки
-        self.push_back('\0');
+        stringInputUser.push_back('\0');
 
-        return self;
+        return stringInputUser;
     }
 
     // Вернуть длину строки
     int Lenght()
     {
-        return self.length();
+        return stringInputUser.length();
     }
 
     // Возвращает часть строки
     string SubStr(int startPos, int endPos)
     {
-        return self.substr(startPos, endPos);
+        return stringInputUser.substr(startPos, endPos);
     }
 
     // Метод возвращающий индекс элемента массива с которым происходит сравнение
@@ -73,8 +73,8 @@ public:
     bool IsNotLetter(int index)
     {
         // Если символ отличный от буквы
-        if (((int)self[index] > 91 && (int)self[index] < 96)
-            || (int)self[index] < 64 || (int)self[index] > 123)
+        if (((int)stringInputUser[index] > 91 && (int)stringInputUser[index] < 96)
+            || (int)stringInputUser[index] < 64 || (int)stringInputUser[index] > 123)
             return true;
 
         return false;
@@ -83,7 +83,7 @@ public:
     // Если сивол - цифра
     bool IsDigitalSymbol(int index)
     {
-        if ((int)self[index] > 47 && (int)self[index] < 59)
+        if ((int)stringInputUser[index] > 47 && (int)stringInputUser[index] < 59)
             return true;
         return false;
     }
@@ -92,7 +92,7 @@ public:
     // Если пробел - true, если нет то false
     bool IsSpaceSymbol(int index)
     {
-        if ((int)self[index] == 32)
+        if ((int)stringInputUser[index] == 32)
             return true;
         return false;
     }
@@ -104,7 +104,7 @@ public:
         /// должна следовать открытая круглая скобка,
         /// проверим ее присутствие.
         // Если скобка отсутствует, то укажем на ошибку
-        return self[index] == '(' ? true : false;
+        return stringInputUser[index] == '(' ? true : false;
     }
 
     // Функция проверки введенной открытой скобки
@@ -112,7 +112,7 @@ public:
     {
         /// Завершаемым символом конструкции должна быть закрытая круглая скобка
         // Если скобка отсутствует, то укажем на ошибку
-        return self[index] == ')' ? true : false;
+        return stringInputUser[index] == ')' ? true : false;
     }
 
     // Метод ищет цифру
@@ -123,7 +123,7 @@ public:
         // уже потом запятую и снова число.
 
         // Ищем первую цифру.
-        for (int i = index; i < self.length(); i++) {
+        for (int i = index; i < stringInputUser.length(); i++) {
             
             if (!IsSpaceSymbol(i)) {
                 if (IsDigitalSymbol(i))
@@ -131,8 +131,7 @@ public:
                     return true;
                 return false;
             }
-            else {
-            }
+
         }
         return false;
     }
