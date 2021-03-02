@@ -2,10 +2,15 @@
 #include <stdio.h>
 #include <string.h>
 
+// Выделяем  пространоство std, для более удобной работы с классами и методами
+
 using namespace std;
 
-class UserString : string {
+// Объявляем класс ParseString, в котором будем описывать методы работы со
+// строкой
+class ParseString : string {
 private:
+    //Скрыл поле пользовательской строки от изменения вне класса
     // Строка введенная пользователем
     string stringInputUser;
 
@@ -28,10 +33,10 @@ public:
     // Метод ищет (пусть ищет) ключевое слово
     void FindKeyWord()
     {
-        /// По своеобразной логике было решено, проверить сначала ключевое
+        /// проверим сначала ключевое слово
         /// слово В данном случае circle || triangle || polygon Для этого
         /// будем считать, что любой символ кроме заглавных и строчных
-        /// литералов будет являться ограничителем для проверки введеного
+        /// будет являться ограничителем для проверки введеного
         /// ключевого слова
         for (int i = 0; i < stringInputUser.length(); i++) {
             // Если получили символ отличный от буквы
@@ -86,7 +91,7 @@ public:
         int index = -1;
 
         for (int i = 0; i < sizeArray; i++) {
-            if (this->Equals(array[i], stringInputUser.substr(0, indexStr))) { 
+            if (this->Equals(array[i], stringInputUser.substr(0, indexStr))) {
                 index = i;
             }
         }
@@ -118,7 +123,7 @@ public:
 
     // Проверка на пробел
     // Если пробел - true, если нет то false
-    bool IsSpaceSymbol(int index)
+    bool IsWhitespace(int index)
     {
         if ((int)stringInputUser[index] == 32)
             return true;
@@ -144,21 +149,24 @@ public:
     }
 
     // Метод ищет цифру
-    bool FindDigital(int index)
+    bool FindDigital()
     {
         // Если прошли все прошлые проверки, то теперь
         // ищем первое число затем еще одно число через пробел, и
         // уже потом запятую и снова число.
 
         // Ищем первую цифру.
-        for (int i = index; i < stringInputUser.length(); i++) {
-            if (!IsSpaceSymbol(i)) {
-                if (IsDigitalSymbol(i))
-
+        for (int i = indexStr + 1; i < stringInputUser.length(); i++) {
+            if (!IsWhitespace(i)) {
+                if (IsDigitalSymbol(i)) {
                     return true;
-                return false;
+                } else {
+                    indexStr = i;
+                    return false;
+                }
             }
         }
+
         return false;
     }
 };
@@ -169,7 +177,7 @@ int main()
     string inputString;
 
     // Строка для обработки
-    UserString userString;
+    ParseString ParseString;
 
     // Размерность массива с ключевыми словами
     int sizeArrayKeyWords = 3;
@@ -183,47 +191,60 @@ int main()
     getline(cin, inputString);
 
     // Задаю строку
-    userString.SetString(inputString);
+    ParseString.SetString(inputString);
 
     // Добавляю в конец строки нулевой символ
-    userString.AppendZeroSymbol();
+    ParseString.AppendZeroSymbol();
 
     // Ищем ключевое слово
-    userString.FindKeyWord();
+    ParseString.FindKeyWord();
 
-    switch (userString.RetunIndexArrayCompare(arrayKeyWords, sizeArrayKeyWords)) {
+    switch (ParseString.RetunIndexArrayCompare(
+            arrayKeyWords, sizeArrayKeyWords)) {
     case -1: // Ввели что-то неизвестное
         cout << "ошибка";
         break;
 
     case 0: // Круг
 
-        if (userString.IsOpenParenthesis()) {
-            if (userString.FindDigital(userString.indexStr + 1)) {
+        // Если скобка открытая
+        if (ParseString.IsOpenParenthesis()) {
+            // проверяем а число ли идет после скобки, и не важно после какого
+            // числа пробелов Если число
+            if (ParseString.FindDigital()) {
                 cout << "Digital";
             } else {
-                cout << "NotDigital";
+                // Если не число, то указать на номер в строке
+
+                cout << "Error NotDigital";
+                cout << "Символ #" << ParseString.indexStr
+                     << " должен быть - цифрой \n";
             }
 
         } else {
-            cout << "Символ #" << userString.indexStr + 1 << " должен быть - ( \n";
+            // Иначе если скобка закрытая, то пишем ошибку и указываем на номер
+            // в строке
+            cout << "Символ #" << ParseString.indexStr + 1
+                 << " должен быть - ( \n";
         }
 
         break;
 
     case 1: // треугольник
-        if (userString.IsOpenParenthesis()) {
+        if (ParseString.IsOpenParenthesis()) {
             cout << "Скобка есть";
         } else {
-            cout << "Символ #" << userString.indexStr + 1 << " должен быть - ( \n";
+            cout << "Символ #" << ParseString.indexStr + 1
+                 << " должен быть - ( \n";
         }
         break;
 
     case 2: // Полигон
-        if (userString.IsOpenParenthesis()) {
+        if (ParseString.IsOpenParenthesis()) {
             cout << "Скобка есть";
         } else {
-            cout << "Символ #" << userString.indexStr + 1 << " должен быть - ( \n";
+            cout << "Символ #" << ParseString.indexStr + 1
+                 << " должен быть - ( \n";
         }
         break;
 
