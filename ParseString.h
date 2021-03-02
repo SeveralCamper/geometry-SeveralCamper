@@ -12,6 +12,15 @@ private:
     // Строка введенная пользователем
     string stringInputUser;
 
+    // В данном случае решаю проблему при которой,
+    // если отсутствует нулевой символ, то работа со строкой может возвращать
+    // нeкорректный результат
+    void AppendZeroSymbol()
+    {
+        // записываю нулевой символ в конец строки
+        stringInputUser.push_back('\0');
+    }
+
 public:
     // Хранит индекс строки
     int indexStr = 0;
@@ -28,17 +37,25 @@ public:
         return str;
     }
 
-    // Метод ищет (пусть ищет) ключевое слово
-    void FindKeyWord()
+    // Проверка на символ отличный от буквы
+    bool IsNotChar(int index)
     {
-        /// проверим сначала ключевое слово
-        /// слово В данном случае circle || triangle || polygon Для этого
-        /// будем считать, что любой символ кроме заглавных и строчных
-        /// будет являться ограничителем для проверки введеного
-        /// ключевого слова
+        // Если символ отличный от буквы
+        if (((int)stringInputUser[index] > 91
+             && (int)stringInputUser[index] < 96)
+            || (int)stringInputUser[index] < 64
+            || (int)stringInputUser[index] > 123)
+            return true;
+
+        return false;
+    }
+
+    // Метод который ищет первый символ не совпадающий с буквой
+    void FindFirstCharDifferentFrom()
+    {
         for (int i = 0; i < stringInputUser.length(); i++) {
             // Если получили символ отличный от буквы
-            if (IsNotLetter(i)) {
+            if (IsNotChar(i)) {
                 // Запоминаем индекс, на котором остановились
                 indexStr = i;
 
@@ -46,6 +63,20 @@ public:
                 break;
             }
         }
+    }
+
+    // Метод возвращающий индекс элемента массива с которым происходит сравнение
+    int GetIndexArrayCompare(string array[], int sizeArray)
+    {
+        int indexKeyWord = -1;
+
+        for (int i = 0; i < sizeArray; i++) {
+            if (this->Equals(array[i], stringInputUser.substr(0, indexStr))) {
+                indexKeyWord = i;
+            }
+        }
+
+        return indexKeyWord;
     }
 
     // Метод сравнения двух строк
@@ -56,19 +87,13 @@ public:
         return false;
     }
 
-    // Метод устанавливает в поле stringInputUser введную строку пользователя
+    // Метод устанавливающий в поле stringInputUser введную строку пользователя
     void SetString(string str)
     {
         stringInputUser = str;
-    }
 
-    // В данном случае решаю проблему при которой,
-    // если отсутствует нулевой символ, то работа со строкой может возвращать
-    // нкорректный результат
-    void AppendZeroSymbol()
-    {
-        // записываю нулевой символ в конец строки
-        stringInputUser.push_back('\0');
+        // Добавляю в конец строки нулевой символ
+        AppendZeroSymbol();
     }
 
     // Вернуть длину строки
@@ -83,31 +108,10 @@ public:
         return stringInputUser.substr(startPos, endPos);
     }
 
-    // Метод возвращающий индекс элемента массива с которым происходит сравнение
-    int RetunIndexArrayCompare(string array[], int sizeArray)
+    // Возвращает индекс символа
+    int GetIndex()
     {
-        int index = -1;
-
-        for (int i = 0; i < sizeArray; i++) {
-            if (this->Equals(array[i], stringInputUser.substr(0, indexStr))) {
-                index = i;
-            }
-        }
-
-        return index;
-    }
-
-    // Проверка на символ отличный от буквы
-    bool IsNotLetter(int index)
-    {
-        // Если символ отличный от буквы
-        if (((int)stringInputUser[index] > 91
-             && (int)stringInputUser[index] < 96)
-            || (int)stringInputUser[index] < 64
-            || (int)stringInputUser[index] > 123)
-            return true;
-
-        return false;
+        return indexStr;
     }
 
     // Если сивол - цифра
@@ -128,7 +132,7 @@ public:
         return false;
     }
 
-    // Функция проверки введенной открытой скобки
+    // Открытая скобка или нет
     bool IsOpenParenthesis()
     {
         /// Поскольку следом за ключевым словом
@@ -154,12 +158,13 @@ public:
         // уже потом запятую и снова число.
 
         // Ищем первую цифру.
-        for (int i = indexStr + 1; i < stringInputUser.length(); i++) {
-            if (!IsWhitespace(i)) {
-                if (IsDigitalSymbol(i)) {
+        for (int index = indexStr + 1; index < stringInputUser.length();
+             index++) {
+            if (!IsWhitespace(index)) {
+                if (IsDigitalSymbol(index)) {
                     return true;
                 } else {
-                    indexStr = i;
+                    indexStr = index;
                     return false;
                 }
             }
