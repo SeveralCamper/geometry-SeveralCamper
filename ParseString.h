@@ -12,6 +12,9 @@ private:
     // Строка введенная пользователем
     string stringInputUser;
 
+    //Строка хранящая число
+    string stringNumber;
+
     // В данном случае решаю проблему при которой,
     // если отсутствует нулевой символ, то работа со строкой может возвращать
     // нeкорректный результат
@@ -50,6 +53,70 @@ public:
         return false;
     }
 
+    // Метод возвращающий истину если ключевое слово совпало
+    bool IsEqualsKeyWord(string keyWord)
+    {
+        if (this->Equals(keyWord, stringInputUser.substr(0, indexStr)))
+            return true;
+        return false;
+    }
+
+    // Если сивол - цифра
+    bool IsDigitalSymbol(int index)
+    {
+        if ((int)stringInputUser[index] > 47
+            && (int)stringInputUser[index] < 59)
+            return true;
+        return false;
+    }
+
+    // Проверка на пробел
+    // Если пробел - true, если нет то false
+    bool IsWhitespace(int index)
+    {
+        if ((int)stringInputUser[index] == 32)
+            return true;
+        return false;
+    }
+
+    // Открытая скобка или нет
+    bool IsOpenParenthesis()
+    {
+        /// Поскольку следом за ключевым словом
+        /// должна следовать открытая круглая скобка,
+        /// проверим ее присутствие.
+        // Если скобка отсутствует, то укажем на ошибку
+        return stringInputUser[indexStr] == '(' ? true : false;
+    }
+
+    // Функция проверки введенной открытой скобки
+    bool IsCloseParenthesis()
+    {
+        /// Завершаемым символом конструкции должна быть закрытая круглая скобка
+        // Если скобка отсутствует, то укажем на ошибку
+        return stringInputUser[indexStr + 1] == ')' ? true : false;
+    }
+
+        // Метод ищет запятую
+    bool IsComma()
+    {
+        // Ищем запятую.
+        for (int index = indexStr + 1; index < stringInputUser.length();
+             index++) {
+            if (!IsWhitespace(index)) {
+                if (stringInputUser[index] == ',') {
+                    indexStr = index;
+                    return true;
+                } else {
+                    indexStr = index;
+                    return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
     // Метод который ищет первый символ не совпадающий с буквой
     void FindFirstCharDifferentFrom()
     {
@@ -65,21 +132,9 @@ public:
         }
     }
 
-    // Метод возвращающий индекс элемента массива с которым происходит сравнение
-    int GetIndexArrayCompare(string array[], int sizeArray)
-    {
-        int indexKeyWord = -1;
-
-        for (int i = 0; i < sizeArray; i++) {
-            if (this->Equals(array[i], stringInputUser.substr(0, indexStr))) {
-                indexKeyWord = i;
-            }
-        }
-
-        return indexKeyWord;
-    }
-
     // Метод сравнения двух строк
+    // В данном случае не просто сравнивает ,
+    // а еще преобразует к единому регистру
     bool Equals(string str_1, string str_2)
     {
         if (ToLower(str_1) == ToLower(str_2))
@@ -114,54 +169,15 @@ public:
         return indexStr;
     }
 
-    // Если сивол - цифра
-    bool IsDigitalSymbol(int index)
-    {
-        if ((int)stringInputUser[index] > 47
-            && (int)stringInputUser[index] < 59)
-            return true;
-        return false;
-    }
-
-    // Проверка на пробел
-    // Если пробел - true, если нет то false
-    bool IsWhitespace(int index)
-    {
-        if ((int)stringInputUser[index] == 32)
-            return true;
-        return false;
-    }
-
-    // Открытая скобка или нет
-    bool IsOpenParenthesis()
-    {
-        /// Поскольку следом за ключевым словом
-        /// должна следовать открытая круглая скобка,
-        /// проверим ее присутствие.
-        // Если скобка отсутствует, то укажем на ошибку
-        return stringInputUser[indexStr] == '(' ? true : false;
-    }
-
-    // Функция проверки введенной открытой скобки
-    bool IscloseParenthesis(int index)
-    {
-        /// Завершаемым символом конструкции должна быть закрытая круглая скобка
-        // Если скобка отсутствует, то укажем на ошибку
-        return stringInputUser[index] == ')' ? true : false;
-    }
-
     // Метод ищет цифру
     bool FindDigital()
     {
-        // Если прошли все прошлые проверки, то теперь
-        // ищем первое число затем еще одно число через пробел, и
-        // уже потом запятую и снова число.
-
-        // Ищем первую цифру.
+        // Ищем цифру.
         for (int index = indexStr + 1; index < stringInputUser.length();
              index++) {
             if (!IsWhitespace(index)) {
                 if (IsDigitalSymbol(index)) {
+                    indexStr = index;
                     return true;
                 } else {
                     indexStr = index;
@@ -170,6 +186,73 @@ public:
             }
         }
 
+        // Если по неведомым причинам попали сюда, хоть и не должны
+        // Тут вообще много вариантов было. решил сделать так.
         return false;
+    }
+
+    // Метод ищет число
+    int FindNumber()
+    {
+        stringNumber = "";
+
+        for (int index = indexStr; index < stringInputUser.length(); index++) {
+            // Если Это цифра
+            if (IsDigitalSymbol(index)) {
+                // Добавляем найденую цифру к строке числа
+                stringNumber += stringInputUser[index];
+            }
+
+            // Если пробел,
+            if (IsWhitespace(index) || index == stringInputUser.length() - 1) {
+                // Сохраняем индекс
+                indexStr = index;
+
+                // И выходим из цикла
+                return 0;
+            }
+
+            //  Если всё кроме пробела и цифры
+            if (!IsDigitalSymbol(index) && !IsWhitespace(index)) {
+                // Сохраняем индекс и возвращем ошибку
+                indexStr = index;
+                return 1;
+            }
+        }
+
+        // Если по неведомым причинам попали сюда, хоть и не должны
+        return -1;
+    }
+
+    // Метод преобразования в число из строки
+    int StrToInt()
+    {
+        /// Хочу оговориться, что этот метод НЕ безопасный!!!
+        /// Предполагается что переданная сюда строка содержит ТОЛЬКО символы
+        /// цифр Необходимо провести дополнительную проверку каждого символа на
+        /// цифру. НО! по скольку поле зарыто от вмешательства пользователя, и в
+        /// методе получения числа мы явно находили только числа, будем считать
+        /// ,что строка является корректной. но всё же необходимо ограничить
+        /// строку по длине цифр. Максимальная длина строки 10 симоволов. По
+        /// скольку преобразование делаю пока только в тип Int - 2147483647 (11
+        /// символов) Все символы после будут отсечены. Коряво, но в будущем
+        /// улучшу
+
+        // Сконвертированное число
+        int number = 0;
+
+        // Обрезанная строка
+        string stringNumberCrop = stringNumber.substr(0, 10);
+
+        int digit = 1;
+
+        // переводим строку в число
+        for (int i = stringNumberCrop.length() - 1; i >= 0; i--) {
+            number += ((int)stringNumberCrop[i] - 48) * digit;
+
+            digit *= 10;
+        }
+
+        return number;
     }
 };
