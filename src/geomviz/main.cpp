@@ -59,7 +59,7 @@ int main()
     string tokensTriangle[] = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
     int tokensTriangleSize = 10;
 
-    int tokensList[] = {};
+    int tokensList[5] = {};
 
     int tokensListSize = 0;
 
