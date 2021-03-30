@@ -3,7 +3,7 @@
 #include <string.h>
 #include <vector>
 
-#include "ParseString.h"
+#include "../libgeomviz/ParseString.h"
 
 // Выделяем  пространство std, для более удобной работы с классами и методами
 
@@ -59,7 +59,7 @@ int main()
     string tokensTriangle[] = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
     int tokensTriangleSize = 10;
 
-    int tokensList[] = {};
+    int tokensList[5] = {};
 
     int tokensListSize = 0;
 

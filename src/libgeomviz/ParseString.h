@@ -31,7 +31,7 @@ public:
     // Метод для преобразования букв к нижнему регистру
     string ToLower(string str)
     {
-      for (int index = 0; index <(int) str.length(); index++) {
+        for (int index = 0; index < str.length(); index++) {
             if ((int)str[index] > 64 && (int)str[index] < 91) {
                 str[index] += 32;
             }
@@ -101,7 +101,7 @@ public:
     bool IsComma()
     {
         // Ищем запятую.
-      for (int index = indexStr + 1; index < (int)stringInputUser.length();
+        for (int index = indexStr + 1; index < stringInputUser.length();
              index++) {
             if (!IsWhitespace(index)) {
                 if (stringInputUser[index] == ',') {
@@ -120,7 +120,7 @@ public:
     // Метод который ищет первый символ не совпадающий с буквой
     void FindFirstCharDifferentFrom()
     {
-      for (int i = 0; i < (int)stringInputUser.length(); i++) {
+        for (int i = 0; i < stringInputUser.length(); i++) {
             // Если получили символ отличный от буквы
             if (IsNotChar(i)) {
                 // Запоминаем индекс, на котором остановились
@@ -173,7 +173,7 @@ public:
     bool FindDigital()
     {
         // Ищем цифру.
-      for (int index = indexStr + 1; index < (int)stringInputUser.length();
+        for (int index = indexStr + 1; index < stringInputUser.length();
              index++) {
             if (!IsWhitespace(index)) {
                 if (IsDigitalSymbol(index)) {
@@ -196,7 +196,7 @@ public:
     {
         stringNumber = "";
 
-        for (int index = indexStr; index <(int) stringInputUser.length(); index++) {
+        for (int index = indexStr; index < stringInputUser.length(); index++) {
             // Если Это цифра
             if (IsDigitalSymbol(index)) {
                 // Добавляем найденую цифру к строке числа
@@ -204,7 +204,7 @@ public:
             }
 
             // Если пробел,
-            if (IsWhitespace(index) || index == (int) stringInputUser.length() - 1) {
+            if (IsWhitespace(index) || index == stringInputUser.length() - 1) {
                 // Сохраняем индекс
                 indexStr = index;
 
@@ -227,6 +227,7 @@ public:
     // Метод преобразования в число из строки
     int StrToInt()
     {
+        /// Хочу оговориться, что этот метод НЕ безопасный!!!
         /// Предполагается что переданная сюда строка содержит ТОЛЬКО символы
         /// цифр Необходимо провести дополнительную проверку каждого символа на
         /// цифру. НО! по скольку поле зарыто от вмешательства пользователя, и в
