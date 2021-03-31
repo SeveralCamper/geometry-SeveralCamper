@@ -6,7 +6,7 @@ obj/main.o:src/geomviz/main.cpp
 run:
 	./bin/main
 clean:
-	find . -name "*.o" -exec {} \;
-	find . -name "*.o" -exec {} \;
-.PHONY: clean
+	find . -name "*.o" -exec rm '{}' \;
+	find . -name "main" -exec  rm '{}' \;
+.PHONY: clean run all
 
