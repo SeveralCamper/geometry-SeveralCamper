@@ -2,12 +2,38 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
+#include <math.h>
 
 #include "../libgeomviz/ParseString.h"
+
+#define PI 3.1415
 
 // Выделяем  пространство std, для более удобной работы с классами и методами
 
 using namespace std;
+
+void CirclePandS(vector<int> coordinates)
+{
+    double p = coordinates[2] * 2 * PI;
+    double s = coordinates[2] * coordinates[2] * PI;
+    cout << "Perimeter is " << p << "\nSquare is " << s << endl;
+}
+
+double length(int x1, int y1, int x2, int y2)
+{
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+void TrianglePandS(vector<int> coordinates)
+{
+    double AB = length(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
+    double BC = length(coordinates[2], coordinates[3], coordinates[4], coordinates[5]);
+    double CA = length(coordinates[4], coordinates[5], coordinates[0], coordinates[1]);
+    double p = AB + BC + CA;
+    double p2 = p / 2;
+    double s = sqrt(p2 * (p2 - AB) * (p2 - BC) * (p2 - CA));
+    cout << "Perimeter is " << p << "\nSquare is " << s << endl;
+}
 
 void ShowCoordinatesCircle(vector<int> coordinates)
 {
@@ -59,7 +85,7 @@ int main()
     string tokensTriangle[] = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
     int tokensTriangleSize = 10;
 
-    int tokensList[5] = {};
+    int tokensList[10] = {};
 
     int tokensListSize = 0;
 
@@ -222,11 +248,13 @@ int main()
         if (keyShow == "circle")
         {
             ShowCoordinatesCircle(collectionCoordinates);
+            CirclePandS(collectionCoordinates);
         }
 
         if (keyShow == "triangle")
         {
             ShowCoordinatesTriangle(collectionCoordinates);
+            TrianglePandS(collectionCoordinates);
         }
     }
 

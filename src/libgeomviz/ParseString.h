@@ -255,34 +255,5 @@ public:
         return number;
     }
 
-  // Метод нахождения пириметра круга
-  long CirclePerimetr()
-  {
-    int radius = 0;
-    int const = 2;
-    long  pi = 3.1415;
-
-    long perimetr = 0;
-
-    long  perimetr = const *long pi * int radius;
-  }
-  
-   // Метод нахождения пириметра треугольника координатным методом: найдем по формуле длины стороны через координаты три стороны
-   // тр-ка и потом суммируем результаты
-  long TrianglePerimetr()
-  {
-    int AB = 0;
-    int BC = 0;
-    int CA = 0;
-
-    long perimetr = 0;
-
-    AB =; 
-    BC =;
-    CA =;
-
-    long  perimetr = AB + BC + CA;
-  }
-
   
 };
