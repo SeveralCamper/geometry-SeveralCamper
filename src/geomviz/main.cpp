@@ -94,167 +94,176 @@ int main()
 
     // Строка для обработки
     ParseString parseString;
-
+    int count;
     string keyShow = "";
-
-    cout << "Введите строку с названием фигуры и ее параметрами \n";
-
-    // Считываем строку введенную пользователем с пробелами и переносами
-    // строк. Поскольку стандартный метод ввода не позволяет считать
-    // строку с пробеламиf
-    getline(cin, inputString);
-
-    // Задаю строку
-    parseString.SetString(inputString);
-
-    // Получаю некую последовательность буквенных символов до первого вхождения
-    // не буквенного симовола
-    parseString.FindFirstCharDifferentFrom();
-
-    // Флаг ошибки
-    bool isError = false;
-
-    /// Если ключевое слово - CIRCLE
-    if (parseString.IsEqualsKeyWord("circle"))
+    cout << "Введите количество фигур\n";
+    cin >> count;
+    cin.clear();
+    fflush(stdin);
+    for(int i = 0; i < count + 1; i++)
     {
-        isError = false;
+        if (i != 0)
+            cout << "Введите строку с названием фигуры и ее параметрами \n";
 
-        Tokenizer(tokensCircle, tokensCircleSize, tokensList);
+        // Считываем строку введенную пользователем с пробелами и переносами
+        // строк. Поскольку стандартный метод ввода не позволяет считать
+        // строку с пробеламиf
+        getline(cin, inputString);
 
-        tokensListSize = tokensCircleSize;
+        // Задаю строку
+        parseString.SetString(inputString);
 
-        keyShow = "circle";
-    }
+        // Получаю некую последовательность буквенных символов до первого вхождения
+        // не буквенного симовола
+        parseString.FindFirstCharDifferentFrom();
 
-    /// Если ключевое слово - TRIANGLE
-    if (parseString.IsEqualsKeyWord("triangle"))
-    {
-        isError = false;
-
-        Tokenizer(tokensTriangle, tokensTriangleSize, tokensList);
-
-        tokensListSize = tokensTriangleSize;
-
-        keyShow = "triangle";
-    }
-
-    /// Если ключевого слова нет или там ошибка
-    if (!parseString.IsEqualsKeyWord("circle") && !parseString.IsEqualsKeyWord("triangle"))
-    {
-        isError = true;
-
-        cout << "Ошибка в ключевом слове!";
-    }
-
-    if (!isError)
-    {
-        for (int i = 0; i < tokensListSize; i++)
+        // Флаг ошибки
+        bool isError = false;
+        /// Если ключевое слово - CIRCLE
+        if (parseString.IsEqualsKeyWord("circle"))
         {
-            // Если ошибок не было
-            if (!isError)
+            isError = false;
+
+            Tokenizer(tokensCircle, tokensCircleSize, tokensList);
+
+            tokensListSize = tokensCircleSize;
+
+            keyShow = "circle";
+        }
+
+        /// Если ключевое слово - TRIANGLE
+        if (parseString.IsEqualsKeyWord("triangle"))
+        {
+            isError = false;
+
+            Tokenizer(tokensTriangle, tokensTriangleSize, tokensList);
+
+            tokensListSize = tokensTriangleSize;
+
+            keyShow = "triangle";
+        }
+
+        /// Если ключевого слова нет или там ошибка
+        if(i != 0)
+        {
+            if (!parseString.IsEqualsKeyWord("circle") && !parseString.IsEqualsKeyWord("triangle"))
             {
-                /// Переходим на Ключ при определенном токене
-                switch (tokensList[i])
+                isError = true;
+
+                cout << "Ошибка в ключевом слове!";
+            }
+        }
+
+        if (!isError)
+        {
+            for (int i = 0; i < tokensListSize; i++)
+            {
+                // Если ошибок не было
+                if (!isError)
                 {
-                case 101: // Если токен открытая скобка
+                    /// Переходим на Ключ при определенном токене
+                    switch (tokensList[i])
+                    {
+                    case 101: // Если токен открытая скобка
 
-                    if (parseString.IsOpenParenthesis())
-                    {
-                        isError = false;
-                    }
-                    else
-                    {
-                        isError = true;
-                        cout << "Символ #" << parseString.indexStr + 1
-                             << " должен быть - ( \n\n";
-                    }
-
-                    break;
-
-                case 102: // Если токен закрытая скобка
-                    if (parseString.IsCloseParenthesis())
-                    {
-                        isError = false;
-                    }
-                    else
-                    {
-                        isError = true;
-                        cout << "Символ #" << parseString.indexStr + 1
-                             << " должен быть - ) \n\n";
-                    }
-                    break;
-
-                case 104: // Если токен запятая
-                    if (parseString.IsComma())
-                    {
-                        isError = false;
-                    }
-                    else
-                    {
-                        isError = true;
-                        cout << "Символ #" << parseString.indexStr + 1
-                             << " должен быть - , \n\n";
-                    }
-                    break;
-
-                case 105: // Если токен число
-
-                    if (parseString.FindDigital())
-                    {
-                        if (parseString.FindNumber() == 0)
+                        if (parseString.IsOpenParenthesis())
                         {
                             isError = false;
-
-                            collectionCoordinates.push_back(
-                                parseString.StrToInt());
+                        }
+                        else
+                        {
+                            isError = true;
+                            cout << "Символ #" << parseString.indexStr + 1
+                                << " должен быть - ( \n\n";
                         }
 
-                        if (parseString.FindNumber() == -1)
+                        break;
+
+                    case 102: // Если токен закрытая скобка
+                        if (parseString.IsCloseParenthesis())
+                        {
+                            isError = false;
+                        }
+                        else
+                        {
+                            isError = true;
+                            cout << "Символ #" << parseString.indexStr + 1
+                                << " должен быть - ) \n\n";
+                        }
+                        break;
+
+                    case 104: // Если токен запятая
+                        if (parseString.IsComma())
+                        {
+                            isError = false;
+                        }
+                        else
+                        {
+                            isError = true;
+                            cout << "Символ #" << parseString.indexStr + 1
+                                << " должен быть - , \n\n";
+                        }
+                        break;
+
+                    case 105: // Если токен число
+
+                        if (parseString.FindDigital())
+                        {
+                            if (parseString.FindNumber() == 0)
+                            {
+                                isError = false;
+
+                                collectionCoordinates.push_back(
+                                    parseString.StrToInt());
+                            }
+
+                            if (parseString.FindNumber() == -1)
+                            {
+                                isError = true;
+
+                                cout << "None";
+                            }
+
+                            if (parseString.FindNumber() == 1)
+                            {
+                                isError = true;
+
+                                cout << "Символ #" << parseString.indexStr
+                                    << " должен быть цифрой или пробелом\n\n";
+                            }
+                        }
+                        else
                         {
                             isError = true;
 
-                            cout << "None";
-                        }
-
-                        if (parseString.FindNumber() == 1)
-                        {
-                            isError = true;
-
+                            // Если не число, то указать на номер в строке
                             cout << "Символ #" << parseString.indexStr
-                                 << " должен быть цифрой или пробелом\n\n";
+                                << " должен быть - цифрой \n\n";
                         }
+
+                        break;
+
+                    default:
+                        break;
                     }
-                    else
-                    {
-                        isError = true;
-
-                        // Если не число, то указать на номер в строке
-                        cout << "Символ #" << parseString.indexStr
-                             << " должен быть - цифрой \n\n";
-                    }
-
-                    break;
-
-                default:
+                }
+                else
+                {
                     break;
                 }
             }
-            else
+
+            if (keyShow == "circle")
             {
-                break;
+                ShowCoordinatesCircle(collectionCoordinates);
+                CirclePandS(collectionCoordinates);
             }
-        }
 
-        if (keyShow == "circle")
-        {
-            ShowCoordinatesCircle(collectionCoordinates);
-            CirclePandS(collectionCoordinates);
-        }
-
-        if (keyShow == "triangle")
-        {
-            ShowCoordinatesTriangle(collectionCoordinates);
-            TrianglePandS(collectionCoordinates);
+            if (keyShow == "triangle")
+            {
+                ShowCoordinatesTriangle(collectionCoordinates);
+                TrianglePandS(collectionCoordinates);
+            }
         }
     }
 
