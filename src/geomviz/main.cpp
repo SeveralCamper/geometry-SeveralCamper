@@ -1,9 +1,12 @@
 #include <vector>
+#include <array>
 #include <math.h>
+
 
 #define PI 3.1415
 
-void CirclePandS(vector<int> coordinates)
+
+void CirclePandS(const vector<int> &coordinates)
 {
     double p = coordinates[2] * 2 * PI;
     double s = coordinates[2] * coordinates[2] * PI;
@@ -15,7 +18,7 @@ double length(int x1, int y1, int x2, int y2)
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-void TrianglePandS(vector<int> coordinates)
+void TrianglePandS(const vector<int> &coordinates)
 {
     double AB = length(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
     double BC = length(coordinates[2], coordinates[3], coordinates[4], coordinates[5]);
@@ -26,22 +29,23 @@ void TrianglePandS(vector<int> coordinates)
     cout << "Perimeter is " << p << "\nSquare is " << s << endl;
 }
 
-void ShowCoordinatesCircle(vector<int> coordinates)
+void ShowCoordinatesCircle(const vector<int> &coordinates)
 {
     cout << "\ncircle(" << coordinates[0] << " " << coordinates[1] << ", "
          << coordinates[2] << ")\n";
 }
 
-void ShowCoordinatesTriangle(vector<int> coordinates)
+void ShowCoordinatesTriangle(const vector<int> &coordinates)
 {
     cout << "\ntriangle(" << coordinates[0] << " " << coordinates[1] << ", "
          << coordinates[2] << " " << coordinates[3] << ", " << coordinates[4]
          << " " << coordinates[5] << ")\n";
 }
 
-void Tokenizer(string tokens[], int tokensSize, int idTokens[])
+template<std::size_t SIZE>
+void Tokenizer(const array<string, SIZE> &tokens, array<int, 10> &idTokens)
 {
-    for (int i = 0; i < tokensSize; i++)
+    for (int i = 0; i < (int)tokens.size(); i++)
     {
         if (tokens[i] == "(")
             idTokens[i] = 101;
@@ -66,19 +70,15 @@ void Tokenizer(string tokens[], int tokensSize, int idTokens[])
 int main()
 {
     // Массив содержащий координаты фигуры
-    vector<int> collectionCoordinates;
 
     /// Набор токенов для Круга
-    string tokensCircle[] = {"(", "number", "number", ",", "number", ")"};
-    int tokensCircleSize = 6;
+    array<string, 6> tokensCircle = {"(", "number", "number", ",", "number", ")"};
 
     /// Набор токенов для Треугольника
-    string tokensTriangle[] = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
-    int tokensTriangleSize = 10;
+    array<string, 10> tokensTriangle = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
 
-    int tokensList[10] = {};
+    array<int, 10> tokensList = {};
 
-    int tokensListSize = 0;
 
     // введенная пользователем строка
     string inputString;
@@ -93,6 +93,7 @@ int main()
     fflush(stdin);
     for(int i = 0; i < count + 1; i++)
     {
+        vector<int> collectionCoordinates;
         if (i != 0)
             cout << "Введите строку с названием фигуры и ее параметрами \n";
 
@@ -115,9 +116,7 @@ int main()
         {
             isError = false;
 
-            Tokenizer(tokensCircle, tokensCircleSize, tokensList);
-
-            tokensListSize = tokensCircleSize;
+            Tokenizer(tokensCircle, tokensList);
 
             keyShow = "circle";
         }
@@ -127,9 +126,7 @@ int main()
         {
             isError = false;
 
-            Tokenizer(tokensTriangle, tokensTriangleSize, tokensList);
-
-            tokensListSize = tokensTriangleSize;
+            Tokenizer(tokensTriangle, tokensList);
 
             keyShow = "triangle";
         }
@@ -147,7 +144,7 @@ int main()
 
         if (!isError)
         {
-            for (int i = 0; i < tokensListSize; i++)
+            for (int i = 0; i < (int)tokensList.size(); i++)
             {
                 // Если ошибок не было
                 if (!isError)
