@@ -1,16 +1,7 @@
-#include <iostream>
-#include <stdio.h>
-#include <string.h>
 #include <vector>
 #include <math.h>
 
-#include "../libgeomviz/ParseString.h"
-
 #define PI 3.1415
-
-// Выделяем  пространство std, для более удобной работы с классами и методами
-
-using namespace std;
 
 void CirclePandS(vector<int> coordinates)
 {
