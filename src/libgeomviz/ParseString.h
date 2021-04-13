@@ -6,7 +6,7 @@ using namespace std;
 
 // Объявляем класс ParseString, в котором будем описывать методы работы со
 // строкой
-class ParseString : string {
+class ParseString{
 private:
     //Скрыл поле пользовательской строки от изменения вне класса
     // Строка введенная пользователем
@@ -14,15 +14,6 @@ private:
 
     //Строка хранящая число
     string stringNumber;
-
-    // В данном случае решаю проблему при которой,
-    // если отсутствует нулевой символ, то работа со строкой может возвращать
-    // нeкорректный результат
-    void AppendZeroSymbol()
-    {
-        // записываю нулевой символ в конец строки
-        stringInputUser.push_back('\0');
-    }
 
 public:
     // Хранит индекс строки
@@ -74,9 +65,7 @@ public:
     // Если пробел - true, если нет то false
     bool IsWhitespace(int index)
     {
-        if ((int)stringInputUser[index] == 32)
-            return true;
-        return false;
+        return ((int)stringInputUser[index] == 32);
     }
 
     // Открытая скобка или нет
@@ -86,7 +75,7 @@ public:
         /// должна следовать открытая круглая скобка,
         /// проверим ее присутствие.
         // Если скобка отсутствует, то укажем на ошибку
-        return stringInputUser[indexStr] == '(' ? true : false;
+        return stringInputUser[indexStr] == '(';
     }
 
     // Функция проверки введенной открытой скобки
@@ -146,9 +135,6 @@ public:
     void SetString(string str)
     {
         stringInputUser = str;
-
-        // Добавляю в конец строки нулевой символ
-        AppendZeroSymbol();
     }
 
     // Вернуть длину строки
