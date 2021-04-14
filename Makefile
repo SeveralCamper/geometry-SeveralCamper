@@ -7,6 +7,6 @@ run:
 	./bin/main
 clean:
 	find . -name "*.o" -exec rm '{}' \;
-	find . -name "main" -exec  rm '{}' \;
+	find ./bin -type f -name "main" -exec rm -f '{}' \;
 .PHONY: clean run all
 
