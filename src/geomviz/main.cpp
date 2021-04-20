@@ -5,11 +5,11 @@
 #define PI 3.1415
 
 
-void CirclePandS(const vector<int> &coordinates)
+void CirclePandS(const std::vector<int> &coordinates)
 {
     double p = coordinates[2] * 2 * PI;
     double s = coordinates[2] * coordinates[2] * PI;
-    cout << "Perimeter is " << p << "\nSquare is " << s << endl;
+    std::cout << "Perimeter is " << p << "\nSquare is " << s << std::endl;
 }
 
 double length(int x1, int y1, int x2, int y2)
@@ -17,7 +17,7 @@ double length(int x1, int y1, int x2, int y2)
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-void TrianglePandS(const vector<int> &coordinates)
+void TrianglePandS(const std::vector<int> &coordinates)
 {
     double AB = length(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
     double BC = length(coordinates[2], coordinates[3], coordinates[4], coordinates[5]);
@@ -25,24 +25,25 @@ void TrianglePandS(const vector<int> &coordinates)
     double p = AB + BC + CA;
     double p2 = p / 2;
     double s = sqrt(p2 * (p2 - AB) * (p2 - BC) * (p2 - CA));
-    cout << "Perimeter is " << p << "\nSquare is " << s << endl;
+    std::cout << "Perimeter is " << p << "\nSquare is " << s << std::endl;
 }
 
-void ShowCoordinatesCircle(const vector<int> &coordinates)
+void ShowCoordinatesCircle(const std::vector<int> &coordinates)
 {
-    cout << "\ncircle(" << coordinates[0] << " " << coordinates[1] << ", "
+    std::cout << "\ncircle(" << coordinates[0] << " " << coordinates[1] << ", "
          << coordinates[2] << ")\n";
 }
 
-void ShowCoordinatesTriangle(const vector<int> &coordinates)
+void ShowCoordinatesTriangle(const std::vector<int> &coordinates)
 {
-    cout << "\ntriangle(" << coordinates[0] << " " << coordinates[1] << ", "
+    std::cout << "\ntriangle(" << coordinates[0] << " " << coordinates[1] << ", "
          << coordinates[2] << " " << coordinates[3] << ", " << coordinates[4]
          << " " << coordinates[5] << ")\n";
 }
 
 template<std::size_t SIZE>
-void Tokenizer(const array<string, SIZE> &tokens, array<int, 10> &idTokens)
+
+void Tokenizer(const std::array<std::string, SIZE> &tokens, std::array<int, 10> &idTokens)
 {
     for (int i = 0; i < (int)tokens.size(); i++)
     {
@@ -71,35 +72,35 @@ int main()
     // Массив содержащий координаты фигуры
 
     /// Набор токенов для Круга
-    array<string, 6> tokensCircle = {"(", "number", "number", ",", "number", ")"};
+    std::array<std::string, 6> tokensCircle = {"(", "number", "number", ",", "number", ")"};
 
     /// Набор токенов для Треугольника
-    array<string, 10> tokensTriangle = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
+    std::array<std::string, 10> tokensTriangle = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
 
-    array<int, 10> tokensList = {};
+    std::array<int, 10> tokensList = {};
 
 
     // введенная пользователем строка
-    string inputString;
+    std::string inputString;
 
     // Строка для обработки
     ParseString parseString;
     int count;
-    string keyShow = "";
-    cout << "Введите количество фигур\n";
-    cin >> count;
-    cin.clear();
+    std::string keyShow = "";
+    std::cout << "Введите количество фигур\n";
+    std::cin >> count;
+    std::cin.clear();
     fflush(stdin);
     for(int i = 0; i < count + 1; i++)
     {
-        vector<int> collectionCoordinates;
+        std::vector<int> collectionCoordinates;
         if (i != 0)
-            cout << "Введите строку с названием фигуры и ее параметрами \n";
+            std::cout << "Введите строку с названием фигуры и ее параметрами \n";
 
         // Считываем строку введенную пользователем с пробелами и переносами
         // строк. Поскольку стандартный метод ввода не позволяет считать
         // строку с пробеламиf
-        getline(cin, inputString);
+        getline(std::cin, inputString);
 
         // Задаю строку
         parseString.SetString(inputString);
@@ -137,7 +138,7 @@ int main()
             {
                 isError = true;
 
-                cout << "Ошибка в ключевом слове!";
+                std::cout << "Ошибка в ключевом слове!";
             }
         }
 
@@ -160,7 +161,7 @@ int main()
                         else
                         {
                             isError = true;
-                            cout << "Символ #" << parseString.indexStr + 1
+                            std::cout << "Символ #" << parseString.indexStr + 1
                                 << " должен быть - ( \n\n";
                         }
 
@@ -174,7 +175,7 @@ int main()
                         else
                         {
                             isError = true;
-                            cout << "Символ #" << parseString.indexStr + 1
+                            std::cout << "Символ #" << parseString.indexStr + 1
                                 << " должен быть - ) \n\n";
                         }
                         break;
@@ -187,7 +188,7 @@ int main()
                         else
                         {
                             isError = true;
-                            cout << "Символ #" << parseString.indexStr + 1
+                            std::cout << "Символ #" << parseString.indexStr + 1
                                 << " должен быть - , \n\n";
                         }
                         break;
@@ -208,14 +209,14 @@ int main()
                             {
                                 isError = true;
 
-                                cout << "None";
+                                std::cout << "None";
                             }
 
                             if (parseString.FindNumber() == 1)
                             {
                                 isError = true;
 
-                                cout << "Символ #" << parseString.indexStr
+                                std::cout << "Символ #" << parseString.indexStr
                                     << " должен быть цифрой или пробелом\n\n";
                             }
                         }
@@ -224,7 +225,7 @@ int main()
                             isError = true;
 
                             // Если не число, то указать на номер в строке
-                            cout << "Символ #" << parseString.indexStr
+                            std::cout << "Символ #" << parseString.indexStr
                                 << " должен быть - цифрой \n\n";
                         }
 

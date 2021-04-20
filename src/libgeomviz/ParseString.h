@@ -2,25 +2,24 @@
 #include <stdio.h>
 #include <string.h>
 
-using namespace std;
-
 // Объявляем класс ParseString, в котором будем описывать методы работы со
 // строкой
 class ParseString{
 private:
     //Скрыл поле пользовательской строки от изменения вне класса
     // Строка введенная пользователем
-    string stringInputUser;
+    
+    std::string stringInputUser;
 
     //Строка хранящая число
-    string stringNumber;
+    std::string stringNumber;
 
 public:
     // Хранит индекс строки
     int indexStr = 0;
 
     // Метод для преобразования букв к нижнему регистру
-    string ToLower(string str)
+    std::string ToLower(std::string str)
     {
       for (int index = 0; index <((int)str.length()); index++) {
             if ((int)str[index] > 64 && (int)str[index] < 91) {
@@ -45,7 +44,7 @@ public:
     }
 
     // Метод возвращающий истину если ключевое слово совпало
-    bool IsEqualsKeyWord(string keyWord)
+    bool IsEqualsKeyWord(std::string keyWord)
     {
         if (this->Equals(keyWord, stringInputUser.substr(0, indexStr)))
             return true;
@@ -124,7 +123,7 @@ public:
     // Метод сравнения двух строк
     // В данном случае не просто сравнивает ,
     // а еще преобразует к единому регистру
-    bool Equals(string str_1, string str_2)
+    bool Equals(std::string str_1, std::string str_2)
     {
         if (ToLower(str_1) == ToLower(str_2))
             return true;
@@ -132,7 +131,7 @@ public:
     }
 
     // Метод устанавливающий в поле stringInputUser введную строку пользователя
-    void SetString(string str)
+    void SetString(std::string str)
     {
         stringInputUser = str;
     }
@@ -144,7 +143,7 @@ public:
     }
 
     // Возвращает часть строки
-    string SubStr(int startPos, int endPos)
+    std::string SubStr(int startPos, int endPos)
     {
         return stringInputUser.substr(startPos, endPos);
     }
@@ -227,7 +226,7 @@ public:
         int number = 0;
 
         // Обрезанная строка
-        string stringNumberCrop = stringNumber.substr(0, 10);
+        std::string stringNumberCrop = stringNumber.substr(0, 10);
 
         int digit = 1;
 
