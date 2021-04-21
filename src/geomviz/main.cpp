@@ -1,11 +1,10 @@
-#include <vector>
 #include <array>
 #include <cmath>
+#include <vector>
 
 #define PI 3.1415
 
-
-void CirclePandS(const std::vector<int> &coordinates)
+void CirclePandS(const std::vector<int>& coordinates)
 {
     double p = coordinates[2] * 2 * PI;
     double s = coordinates[2] * coordinates[2] * PI;
@@ -17,36 +16,40 @@ double length(int x1, int y1, int x2, int y2)
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-void TrianglePandS(const std::vector<int> &coordinates)
+void TrianglePandS(const std::vector<int>& coordinates)
 {
-    double AB = length(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
-    double BC = length(coordinates[2], coordinates[3], coordinates[4], coordinates[5]);
-    double CA = length(coordinates[4], coordinates[5], coordinates[0], coordinates[1]);
+    double AB = length(
+            coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
+    double BC = length(
+            coordinates[2], coordinates[3], coordinates[4], coordinates[5]);
+    double CA = length(
+            coordinates[4], coordinates[5], coordinates[0], coordinates[1]);
     double p = AB + BC + CA;
     double p2 = p / 2;
     double s = sqrt(p2 * (p2 - AB) * (p2 - BC) * (p2 - CA));
     std::cout << "Perimeter is " << p << "\nSquare is " << s << std::endl;
 }
 
-void ShowCoordinatesCircle(const std::vector<int> &coordinates)
+void ShowCoordinatesCircle(const std::vector<int>& coordinates)
 {
     std::cout << "\ncircle(" << coordinates[0] << " " << coordinates[1] << ", "
-         << coordinates[2] << ")\n";
+              << coordinates[2] << ")\n";
 }
 
-void ShowCoordinatesTriangle(const std::vector<int> &coordinates)
+void ShowCoordinatesTriangle(const std::vector<int>& coordinates)
 {
-    std::cout << "\ntriangle(" << coordinates[0] << " " << coordinates[1] << ", "
-         << coordinates[2] << " " << coordinates[3] << ", " << coordinates[4]
-         << " " << coordinates[5] << ")\n";
+    std::cout << "\ntriangle(" << coordinates[0] << " " << coordinates[1]
+              << ", " << coordinates[2] << " " << coordinates[3] << ", "
+              << coordinates[4] << " " << coordinates[5] << ")\n";
 }
 
-template<std::size_t SIZE>
+template <std::size_t SIZE>
 
-void Tokenizer(const std::array<std::string, SIZE> &tokens, std::array<int, 10> &idTokens)
+void Tokenizer(
+        const std::array<std::string, SIZE>& tokens,
+        std::array<int, 10>& idTokens)
 {
-    for (int i = 0; i < (int)tokens.size(); i++)
-    {
+    for (int i = 0; i < (int)tokens.size(); i++) {
         if (tokens[i] == "(")
             idTokens[i] = 101;
 
@@ -72,13 +75,23 @@ int main()
     // Массив содержащий координаты фигуры
 
     /// Набор токенов для Круга
-    std::array<std::string, 6> tokensCircle = {"(", "number", "number", ",", "number", ")"};
+    std::array<std::string, 6> tokensCircle
+            = {"(", "number", "number", ",", "number", ")"};
 
     /// Набор токенов для Треугольника
-    std::array<std::string, 10> tokensTriangle = {"(", "number", "number", ",", "number", "number", ",", "number", "number", ")"};
+    std::array<std::string, 10> tokensTriangle
+            = {"(",
+               "number",
+               "number",
+               ",",
+               "number",
+               "number",
+               ",",
+               "number",
+               "number",
+               ")"};
 
     std::array<int, 10> tokensList = {};
-
 
     // введенная пользователем строка
     std::string inputString;
@@ -91,11 +104,11 @@ int main()
     std::cin >> count;
     std::cin.clear();
     fflush(stdin);
-    for(int i = 0; i < count + 1; i++)
-    {
+    for (int i = 0; i < count + 1; i++) {
         std::vector<int> collectionCoordinates;
         if (i != 0)
-            std::cout << "Введите строку с названием фигуры и ее параметрами \n";
+            std::cout
+                    << "Введите строку с названием фигуры и ее параметрами \n";
 
         // Считываем строку введенную пользователем с пробелами и переносами
         // строк. Поскольку стандартный метод ввода не позволяет считать
@@ -105,15 +118,14 @@ int main()
         // Задаю строку
         parseString.SetString(inputString);
 
-        // Получаю некую последовательность буквенных символов до первого вхождения
-        // не буквенного симовола
+        // Получаю некую последовательность буквенных символов до первого
+        // вхождения не буквенного симовола
         parseString.FindFirstCharDifferentFrom();
 
         // Флаг ошибки
         bool isError = false;
         /// Если ключевое слово - CIRCLE
-        if (parseString.IsEqualsKeyWord("circle"))
-        {
+        if (parseString.IsEqualsKeyWord("circle")) {
             isError = false;
 
             Tokenizer(tokensCircle, tokensList);
@@ -122,8 +134,7 @@ int main()
         }
 
         /// Если ключевое слово - TRIANGLE
-        if (parseString.IsEqualsKeyWord("triangle"))
-        {
+        if (parseString.IsEqualsKeyWord("triangle")) {
             isError = false;
 
             Tokenizer(tokensTriangle, tokensList);
@@ -132,101 +143,82 @@ int main()
         }
 
         /// Если ключевого слова нет или там ошибка
-        if(i != 0)
-        {
-            if (!parseString.IsEqualsKeyWord("circle") && !parseString.IsEqualsKeyWord("triangle"))
-            {
+        if (i != 0) {
+            if (!parseString.IsEqualsKeyWord("circle")
+                && !parseString.IsEqualsKeyWord("triangle")) {
                 isError = true;
 
                 std::cout << "Ошибка в ключевом слове!";
             }
         }
 
-        if (!isError)
-        {
-            for (int i = 0; i < (int)tokensList.size(); i++)
-            {
+        if (!isError) {
+            for (int i = 0; i < (int)tokensList.size(); i++) {
                 // Если ошибок не было
-                if (!isError)
-                {
+                if (!isError) {
                     /// Переходим на Ключ при определенном токене
-                    switch (tokensList[i])
-                    {
+                    switch (tokensList[i]) {
                     case 101: // Если токен открытая скобка
 
-                        if (parseString.IsOpenParenthesis())
-                        {
+                        if (parseString.IsOpenParenthesis()) {
                             isError = false;
-                        }
-                        else
-                        {
+                        } else {
                             isError = true;
                             std::cout << "Символ #" << parseString.indexStr + 1
-                                << " должен быть - ( \n\n";
+                                      << " должен быть - ( \n\n";
                         }
 
                         break;
 
                     case 102: // Если токен закрытая скобка
-                        if (parseString.IsCloseParenthesis())
-                        {
+                        if (parseString.IsCloseParenthesis()) {
                             isError = false;
-                        }
-                        else
-                        {
+                        } else {
                             isError = true;
                             std::cout << "Символ #" << parseString.indexStr + 1
-                                << " должен быть - ) \n\n";
+                                      << " должен быть - ) \n\n";
                         }
                         break;
 
                     case 104: // Если токен запятая
-                        if (parseString.IsComma())
-                        {
+                        if (parseString.IsComma()) {
                             isError = false;
-                        }
-                        else
-                        {
+                        } else {
                             isError = true;
                             std::cout << "Символ #" << parseString.indexStr + 1
-                                << " должен быть - , \n\n";
+                                      << " должен быть - , \n\n";
                         }
                         break;
 
                     case 105: // Если токен число
 
-                        if (parseString.FindDigital())
-                        {
-                            if (parseString.FindNumber() == 0)
-                            {
+                        if (parseString.FindDigital()) {
+                            if (parseString.FindNumber() == 0) {
                                 isError = false;
 
                                 collectionCoordinates.push_back(
-                                    parseString.StrToInt());
+                                        parseString.StrToInt());
                             }
 
-                            if (parseString.FindNumber() == -1)
-                            {
+                            if (parseString.FindNumber() == -1) {
                                 isError = true;
 
                                 std::cout << "None";
                             }
 
-                            if (parseString.FindNumber() == 1)
-                            {
+                            if (parseString.FindNumber() == 1) {
                                 isError = true;
 
                                 std::cout << "Символ #" << parseString.indexStr
-                                    << " должен быть цифрой или пробелом\n\n";
+                                          << " должен быть цифрой или "
+                                             "пробелом\n\n";
                             }
-                        }
-                        else
-                        {
+                        } else {
                             isError = true;
 
                             // Если не число, то указать на номер в строке
                             std::cout << "Символ #" << parseString.indexStr
-                                << " должен быть - цифрой \n\n";
+                                      << " должен быть - цифрой \n\n";
                         }
 
                         break;
@@ -234,21 +226,17 @@ int main()
                     default:
                         break;
                     }
-                }
-                else
-                {
+                } else {
                     break;
                 }
             }
 
-            if (keyShow == "circle")
-            {
+            if (keyShow == "circle") {
                 ShowCoordinatesCircle(collectionCoordinates);
                 CirclePandS(collectionCoordinates);
             }
 
-            if (keyShow == "triangle")
-            {
+            if (keyShow == "triangle") {
                 ShowCoordinatesTriangle(collectionCoordinates);
                 TrianglePandS(collectionCoordinates);
             }
