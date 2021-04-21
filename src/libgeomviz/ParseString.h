@@ -4,11 +4,11 @@
 
 // Объявляем класс ParseString, в котором будем описывать методы работы со
 // строкой
-class ParseString{
+class ParseString {
 private:
     //Скрыл поле пользовательской строки от изменения вне класса
     // Строка введенная пользователем
-    
+
     std::string stringInputUser;
 
     //Строка хранящая число
@@ -21,7 +21,7 @@ public:
     // Метод для преобразования букв к нижнему регистру
     std::string ToLower(std::string str)
     {
-      for (int index = 0; index <((int)str.length()); index++) {
+        for (int index = 0; index < ((int)str.length()); index++) {
             if ((int)str[index] > 64 && (int)str[index] < 91) {
                 str[index] += 32;
             }
@@ -85,11 +85,11 @@ public:
         return stringInputUser[indexStr + 1] == ')' ? true : false;
     }
 
-        // Метод ищет запятую
+    // Метод ищет запятую
     bool IsComma()
     {
         // Ищем запятую.
-      for (int index = indexStr + 1; index < ((int)stringInputUser.length());
+        for (int index = indexStr + 1; index < ((int)stringInputUser.length());
              index++) {
             if (!IsWhitespace(index)) {
                 if (stringInputUser[index] == ',') {
@@ -108,7 +108,7 @@ public:
     // Метод который ищет первый символ не совпадающий с буквой
     void FindFirstCharDifferentFrom()
     {
-      for (int i = 0; i < ((int)stringInputUser.length()); i++) {
+        for (int i = 0; i < ((int)stringInputUser.length()); i++) {
             // Если получили символ отличный от буквы
             if (IsNotChar(i)) {
                 // Запоминаем индекс, на котором остановились
@@ -158,7 +158,7 @@ public:
     bool FindDigital()
     {
         // Ищем цифру.
-      for (int index = indexStr + 1; index < ((int)stringInputUser.length());
+        for (int index = indexStr + 1; index < ((int)stringInputUser.length());
              index++) {
             if (!IsWhitespace(index)) {
                 if (IsDigitalSymbol(index)) {
@@ -181,7 +181,8 @@ public:
     {
         stringNumber = "";
 
-        for (int index = indexStr; index <((int)stringInputUser.length()); index++) {
+        for (int index = indexStr; index < ((int)stringInputUser.length());
+             index++) {
             // Если Это цифра
             if (IsDigitalSymbol(index)) {
                 // Добавляем найденую цифру к строке числа
@@ -189,7 +190,8 @@ public:
             }
 
             // Если пробел,
-            if (IsWhitespace(index) || index == ((int) stringInputUser.length()) - 1) {
+            if (IsWhitespace(index)
+                || index == ((int)stringInputUser.length()) - 1) {
                 // Сохраняем индекс
                 indexStr = index;
 
@@ -239,6 +241,4 @@ public:
 
         return number;
     }
-
-  
 };
