@@ -1,6 +1,6 @@
 #include <vector>
 #include <array>
-#include <math.h>
+#include <cmath>
 
 #define PI 3.1415
 
