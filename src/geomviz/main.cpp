@@ -43,6 +43,16 @@ void ShowCoordinatesTriangle(const std::vector<int>& coordinates)
               << coordinates[4] << " " << coordinates[5] << ")\n";
 }
 
+enum TokensEnum
+{
+    TOKEN01=101,
+    TOKEN02,
+    TOKEN03,
+    TOKEN04,
+    TOKEN05,
+    TOKEN06
+};
+
 template <std::size_t SIZE>
 
 void Tokenizer(
@@ -51,22 +61,22 @@ void Tokenizer(
 {
     for (int i = 0; i < (int)tokens.size(); i++) {
         if (tokens[i] == "(")
-            idTokens[i] = 101;
+            idTokens[i] = TOKEN01;
 
         if (tokens[i] == ")")
-            idTokens[i] = 102;
+            idTokens[i] = TOKEN02;
 
         if (tokens[i] == "-")
-            idTokens[i] = 103;
+            idTokens[i] = TOKEN03;
 
         if (tokens[i] == ",")
-            idTokens[i] = 104;
+            idTokens[i] = TOKEN04;
 
         if (tokens[i] == "number")
-            idTokens[i] = 105;
+            idTokens[i] = TOKEN05;
 
         if (tokens[i] == ".")
-            idTokens[i] = 106;
+            idTokens[i] = TOKEN06;
     }
 }
 
@@ -158,7 +168,7 @@ int main()
                 if (!isError) {
                     /// Переходим на Ключ при определенном токене
                     switch (tokensList[i]) {
-                    case 101: // Если токен открытая скобка
+                    case TOKEN01: // Если токен открытая скобка
 
                         if (parseString.IsOpenParenthesis()) {
                             isError = false;
@@ -170,7 +180,7 @@ int main()
 
                         break;
 
-                    case 102: // Если токен закрытая скобка
+                    case TOKEN02: // Если токен закрытая скобка
                         if (parseString.IsCloseParenthesis()) {
                             isError = false;
                         } else {
@@ -180,7 +190,7 @@ int main()
                         }
                         break;
 
-                    case 104: // Если токен запятая
+                    case TOKEN04: // Если токен запятая
                         if (parseString.IsComma()) {
                             isError = false;
                         } else {
@@ -190,7 +200,7 @@ int main()
                         }
                         break;
 
-                    case 105: // Если токен число
+                    case TOKEN05: // Если токен число
 
                         if (parseString.FindDigital()) {
                             if (parseString.FindNumber() == 0) {
