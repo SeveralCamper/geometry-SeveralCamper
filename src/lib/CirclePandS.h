@@ -3,8 +3,8 @@
 
 #include <array>
 #include <cmath>
-#include <vector>
 #include <iostream>
+#include <vector>
 
 #define _USE_MATH_DEFINES
 
