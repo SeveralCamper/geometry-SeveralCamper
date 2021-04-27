@@ -1,53 +1,17 @@
-#include "CirclePandS.h"
-#include "TrianglePandS.h"
-#include "length.h"
 #include <array>
 #include <cmath>
 #include <vector>
 
+#include "Tokenizer.h"
+#include "CirclePandS.h"
+#include "TrianglePandS.h"
+#include "length.h"
+#include "ShowCoordinatesCircle.h"
+#include "ShowCoordinatesTriangle.h"
+
 #define _USE_MATH_DEFINES
 
-void ShowCoordinatesCircle(const std::vector<int>& coordinates)
-{
-    std::cout << "\ncircle(" << coordinates[0] << " " << coordinates[1] << ", "
-              << coordinates[2] << ")\n";
-}
-
-void ShowCoordinatesTriangle(const std::vector<int>& coordinates)
-{
-    std::cout << "\ntriangle(" << coordinates[0] << " " << coordinates[1]
-              << ", " << coordinates[2] << " " << coordinates[3] << ", "
-              << coordinates[4] << " " << coordinates[5] << ")\n";
-}
-
 enum TokensEnum { TOKEN01 = 101, TOKEN02, TOKEN03, TOKEN04, TOKEN05, TOKEN06 };
-
-template <std::size_t SIZE>
-
-void Tokenizer(
-        const std::array<std::string, SIZE>& tokens,
-        std::array<int, 10>& idTokens)
-{
-    for (int i = 0; i < (int)tokens.size(); i++) {
-        if (tokens[i] == "(")
-            idTokens[i] = TOKEN01;
-
-        if (tokens[i] == ")")
-            idTokens[i] = TOKEN02;
-
-        if (tokens[i] == "-")
-            idTokens[i] = TOKEN03;
-
-        if (tokens[i] == ",")
-            idTokens[i] = TOKEN04;
-
-        if (tokens[i] == "number")
-            idTokens[i] = TOKEN05;
-
-        if (tokens[i] == ".")
-            idTokens[i] = TOKEN06;
-    }
-}
 
 int main()
 {

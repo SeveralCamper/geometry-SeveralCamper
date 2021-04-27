@@ -1,5 +1,5 @@
-#ifndef TRIANGLE_PAND_S_H
-#define TRIANGLE_PAND_S_H
+#ifndef TRIANGLE_PAND_S_H_
+#define TRIANGLE_PAND_S_H_
 
 #include <array>
 #include <cmath>
