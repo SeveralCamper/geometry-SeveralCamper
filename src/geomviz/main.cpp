@@ -2,14 +2,9 @@
 #include <cmath>
 #include <vector>
 
-#define _USE_MATH_DEFINES
+#include "CirclePandS.h"
 
-void CirclePandS(const std::vector<int>& coordinates)
-{
-    double p = coordinates[2] * 2 * M_PI;
-    double s = coordinates[2] * coordinates[2] * M_PI;
-    std::cout << "Perimeter is " << p << "\nSquare is " << s << std::endl;
-}
+#define _USE_MATH_DEFINES
 
 double length(int x1, int y1, int x2, int y2)
 {
