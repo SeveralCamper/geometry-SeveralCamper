@@ -43,15 +43,7 @@ void ShowCoordinatesTriangle(const std::vector<int>& coordinates)
               << coordinates[4] << " " << coordinates[5] << ")\n";
 }
 
-enum TokensEnum
-{
-    TOKEN01=101,
-    TOKEN02,
-    TOKEN03,
-    TOKEN04,
-    TOKEN05,
-    TOKEN06
-};
+enum TokensEnum { TOKEN01 = 101, TOKEN02, TOKEN03, TOKEN04, TOKEN05, TOKEN06 };
 
 template <std::size_t SIZE>
 
