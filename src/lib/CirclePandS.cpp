@@ -2,7 +2,7 @@
 
 #define _USE_MATH_DEFINES
 
-void CirclePandS(std::vector<int>& coordinates)
+void CirclePandS(const std::vector<int>& coordinates)
 {
     double p = coordinates[2] * 2 * M_PI;
     double s = coordinates[2] * coordinates[2] * M_PI;

@@ -1,29 +1,11 @@
+#include "CirclePandS.h"
+#include "length.h"
+#include "TrianglePandS.h"
 #include <array>
 #include <cmath>
 #include <vector>
 
-#include "CirclePandS.h"
-
 #define _USE_MATH_DEFINES
-
-double length(int x1, int y1, int x2, int y2)
-{
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-}
-
-void TrianglePandS(const std::vector<int>& coordinates)
-{
-    double AB = length(
-            coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
-    double BC = length(
-            coordinates[2], coordinates[3], coordinates[4], coordinates[5]);
-    double CA = length(
-            coordinates[4], coordinates[5], coordinates[0], coordinates[1]);
-    double p = AB + BC + CA;
-    double p2 = p / 2;
-    double s = sqrt(p2 * (p2 - AB) * (p2 - BC) * (p2 - CA));
-    std::cout << "Perimeter is " << p << "\nSquare is " << s << std::endl;
-}
 
 void ShowCoordinatesCircle(const std::vector<int>& coordinates)
 {

@@ -3,11 +3,17 @@ bin/main: obj/main.o obj/lib/geometrylib.a
 	g++ obj/main.o -Wall -Werror -L. obj/lib/geometrylib.a -o $@
 obj/main.o:src/geomviz/main.cpp obj/lib/geometrylib.a
 	g++ -c src/geomviz/main.cpp -include src/lib/ParseString.h -I src/lib -Wall -Werror -o obj/main.o
-	
+
 obj/src/CirclePandS.o:src/lib/CirclePandS.cpp
 	g++ -c src/lib/CirclePandS.cpp -Wall -Werror -o $@
-	
-obj/lib/geometrylib.a : obj/src/CirclePandS.o
+
+obj/src/TrianglePandS.o:src/lib/TrianglePandS.cpp
+	g++ -c src/lib/TrianglePandS.cpp -Wall -Werror -o $@
+
+obj/src/length.o:src/lib/length.cpp
+	g++ -c src/lib/length.cpp -Wall -Werror -o $@	
+
+obj/lib/geometrylib.a:obj/src/CirclePandS.o obj/src/length.o obj/src/TrianglePandS.o
 	ar rcs $@ $^
 	
 run:

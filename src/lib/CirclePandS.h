@@ -1,5 +1,5 @@
-#ifndef CIRCLE_PANDS_H_
-#define CIRCLE_PANDS_H_
+#ifndef CIRCLE_PAND_S_H_
+#define CIRCLE_PAND_S_H_
 
 #include <array>
 #include <cmath>
@@ -8,6 +8,6 @@
 
 #define _USE_MATH_DEFINES
 
-void CirclePandS(std::vector<int>& coordinates);
+void CirclePandS(const std::vector<int>& coordinates);
 
 #endif
