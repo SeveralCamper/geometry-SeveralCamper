@@ -1,3 +1,7 @@
+# TODO:
+# CXXFLAGS = 
+# CPPFLAGS = -D_USE_MATH_DEFINES 
+
 all:bin/main
 bin/main: obj/main.o obj/lib/geometrylib.a 
 	g++ obj/main.o -Wall -Werror -L. obj/lib/geometrylib.a -o $@
@@ -11,7 +15,7 @@ obj/src/TrianglePandS.o:src/lib/TrianglePandS.cpp
 	g++ -c src/lib/TrianglePandS.cpp -Wall -Werror -o $@
 
 obj/src/length.o:src/lib/length.cpp
-	g++ -c src/lib/length.cpp -Wall -Werror -o $@	
+	g++ -c src/lib/length.cpp -Wall -Werror -o $@
 	
 obj/src/ShowCoordinatesCircle.o:src/lib/ShowCoordinatesCircle.cpp
 	g++ -c src/lib/ShowCoordinatesCircle.cpp -Wall -Werror -o $@	

@@ -9,8 +9,19 @@
 #include "ShowCoordinatesCircle.h"
 #include "ShowCoordinatesTriangle.h"
 
+// TODO: to commandline:
+//   -D_USE_MATH_DEFINES
 #define _USE_MATH_DEFINES
 
+// TOKEN01
+// 1. Значение 101 не важно. Достаточно, чтобы значение каждого типа токена было уникально.
+// 2. TOKEN01 используется как тип открытой скобки. Следовательно, должен называться LeftParen
+//
+// enum создает группу глобальных констант.
+//
+// enum class TokenKind { LeftParen, ... };
+// Использование: TokenKind::LeftParen.
+//
 enum TokensEnum { TOKEN01 = 101, TOKEN02, TOKEN03, TOKEN04, TOKEN05, TOKEN06 };
 
 int main()
@@ -18,6 +29,11 @@ int main()
     // Массив содержащий координаты фигуры
 
     /// Набор токенов для Круга
+    // TODO: 
+    //  1. std::vector
+    //     + не нужно делать функции шаблонными
+    //     - heap indirection
+    //  2. std::span (C++20)
     std::array<std::string, 6> tokensCircle
             = {"(", "number", "number", ",", "number", ")"};
 
@@ -98,6 +114,11 @@ int main()
         if (!isError) {
             for (int i = 0; i < (int)tokensList.size(); i++) {
                 // Если ошибок не было
+		// TODO:
+		// if (isError) {
+		//     break;
+		// }
+		// Happy case - indent left.
                 if (!isError) {
                     /// Переходим на Ключ при определенном токене
                     switch (tokensList[i]) {

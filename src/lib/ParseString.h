@@ -2,9 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
+// NOTE:
+// Строки можно делать регистронезависимыми через трейты. Пример:
+// https://compiler-explorer.com/z/K9G41Pxvn
+
 // Объявляем класс ParseString, в котором будем описывать методы работы со
 // строкой
-class ParseString {
+class ParseString final {
 private:
     //Скрыл поле пользовательской строки от изменения вне класса
     // Строка введенная пользователем
@@ -19,32 +23,25 @@ public:
     int indexStr = 0;
 
     // Метод для преобразования букв к нижнему регистру
-    std::string ToLower(std::string str)
-    {
-        for (int index = 0; index < ((int)str.length()); index++) {
-            if ((int)str[index] > 64 && (int)str[index] < 91) {
-                str[index] += 32;
-            }
-        }
-
-        return str;
-    }
+    // ParseString_ToLower(ParseString* this, std::string str);
+    //
+    // const:
+    // ParseString_ToLower(const ParseString* this, std::string str);
+    // std::string ToLower(std::string str) const;
 
     // Проверка на символ отличный от буквы
     bool IsNotChar(int index)
     {
+    	// TODO: https://linux.die.net/man/3/isalpha
         // Если символ отличный от буквы
-        if (((int)stringInputUser[index] > 91
+        return (((int)stringInputUser[index] > 91
              && (int)stringInputUser[index] < 96)
             || (int)stringInputUser[index] < 64
-            || (int)stringInputUser[index] > 123)
-            return true;
-
-        return false;
+            || (int)stringInputUser[index] > 123);
     }
 
     // Метод возвращающий истину если ключевое слово совпало
-    bool IsEqualsKeyWord(std::string keyWord)
+    bool IsEqualsKeyWord(const std::string& keyWord) const
     {
         if (this->Equals(keyWord, stringInputUser.substr(0, indexStr)))
             return true;
@@ -54,6 +51,8 @@ public:
     // Если сивол - цифра
     bool IsDigitalSymbol(int index)
     {
+    	// TODO: https://linux.die.net/man/3/isalpha
+    	// TODO: https://csc-software-development.readthedocs.io/ru/2021/code-style.html#if-true-return-true
         if ((int)stringInputUser[index] > 47
             && (int)stringInputUser[index] < 59)
             return true;
@@ -64,6 +63,7 @@ public:
     // Если пробел - true, если нет то false
     bool IsWhitespace(int index)
     {
+    	// TODO: https://linux.die.net/man/3/isalpha
         return ((int)stringInputUser[index] == 32);
     }
 
@@ -82,21 +82,23 @@ public:
     {
         /// Завершаемым символом конструкции должна быть закрытая круглая скобка
         // Если скобка отсутствует, то укажем на ошибку
-        return stringInputUser[indexStr + 1] == ')' ? true : false;
+        return stringInputUser[indexStr + 1] == ')';
     }
 
     // Метод ищет запятую
+    // TODO: is -> Find
+    // TODO: std::find_if
+    //  https://en.cppreference.com/w/cpp/algorithm/find
     bool IsComma()
     {
         // Ищем запятую.
         for (int index = indexStr + 1; index < ((int)stringInputUser.length());
              index++) {
             if (!IsWhitespace(index)) {
+                indexStr = index;            	
                 if (stringInputUser[index] == ',') {
-                    indexStr = index;
                     return true;
                 } else {
-                    indexStr = index;
                     return false;
                 }
             }
@@ -120,24 +122,11 @@ public:
         }
     }
 
-    // Метод сравнения двух строк
-    // В данном случае не просто сравнивает ,
-    // а еще преобразует к единому регистру
-    bool Equals(std::string str_1, std::string str_2)
-    {
-        if (ToLower(str_1) == ToLower(str_2))
-            return true;
-        return false;
-    }
-
     // Метод устанавливающий в поле stringInputUser введную строку пользователя
-    void SetString(std::string str)
-    {
-        stringInputUser = str;
-    }
+    void SetString(std::string str);
 
     // Вернуть длину строки
-    int Lenght()
+    int Lenght() const
     {
         return stringInputUser.length();
     }
@@ -155,6 +144,8 @@ public:
     }
 
     // Метод ищет цифру
+    // TODO: std::find_if
+    //  https://en.cppreference.com/w/cpp/algorithm/find
     bool FindDigital()
     {
         // Ищем цифру.
@@ -212,6 +203,7 @@ public:
     }
 
     // Метод преобразования в число из строки
+    // TODO?: https://en.cppreference.com/w/cpp/string/basic_string/stof
     int StrToInt()
     {
         // Предполагается что переданная сюда строка содержит ТОЛЬКО символы
