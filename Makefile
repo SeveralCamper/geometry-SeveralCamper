@@ -19,8 +19,8 @@ obj/src/ShowCoordinatesCircle.o:src/lib/ShowCoordinatesCircle.cpp
 obj/src/ShowCoordinatesTriangle.o:src/lib/ShowCoordinatesTriangle.cpp
 	g++ -c src/lib/ShowCoordinatesTriangle.cpp -Wall -Werror -o $@
 
-obj/src/Tokenizer.o:src/lib/Tokenizer.cpp
-	g++ -c src/lib/Tokenizer.cpp -Wall -Werror -o $@
+obj/src/Tokenizer.o:src/lib/Tokenizer.h
+	g++ -c src/lib/Tokenizer.h -Wall -Werror -o $@
 	
 obj/lib/geometrylib.a:obj/src/CirclePandS.o obj/src/length.o obj/src/TrianglePandS.o obj/src/ShowCoordinatesCircle.o obj/src/ShowCoordinatesTriangle.o obj/src/Tokenizer.o
 	ar rcs $@ $^

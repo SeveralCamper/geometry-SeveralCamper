@@ -11,8 +11,6 @@
 
 #define _USE_MATH_DEFINES
 
-enum TokensEnum { TOKEN01 = 101, TOKEN02, TOKEN03, TOKEN04, TOKEN05, TOKEN06 };
-
 int main()
 {
     // Массив содержащий координаты фигуры
