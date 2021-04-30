@@ -22,7 +22,7 @@
 // enum class TokenKind { LeftParen, ... };
 // Использование: TokenKind::LeftParen.
 
-enum TokensKind { LEFTPAREN = 0, RIGHTPAREN, MINUS, COMMA, NUMBER, DOT };
+enum class TokensKind { LEFTPAREN = 0, RIGHTPAREN, MINUS, COMMA, NUMBER, DOT };
 
 template <std::size_t SIZE>
 
@@ -32,22 +32,22 @@ void Tokenizer(
 {
     for (int i = 0; i < (int)tokens.size(); i++) {
         if (tokens[i] == "(")
-            idTokens[i] = LEFTPAREN;
+            idTokens[i] = (int)TokensKind::LEFTPAREN;
 
         if (tokens[i] == ")")
-            idTokens[i] = RIGHTPAREN;
+            idTokens[i] = (int)TokensKind::RIGHTPAREN;
 
         if (tokens[i] == "-")
-            idTokens[i] = MINUS;
+            idTokens[i] = (int)TokensKind::MINUS;
 
         if (tokens[i] == ",")
-            idTokens[i] = COMMA;
+            idTokens[i] = (int)TokensKind::COMMA;
 
         if (tokens[i] == "number")
-            idTokens[i] = NUMBER;
+            idTokens[i] = (int)TokensKind::NUMBER;
 
         if (tokens[i] == ".")
-            idTokens[i] = DOT;
+            idTokens[i] = (int)TokensKind::DOT;
     }
 }
 

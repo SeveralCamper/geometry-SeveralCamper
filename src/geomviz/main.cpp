@@ -99,7 +99,8 @@ int main()
                 if (!isError) {
                     /// Переходим на Ключ при определенном токене
                     switch (tokensList[i]) {
-                    case LEFTPAREN: // Если токен открытая скобка
+                    case (int)
+                            TokensKind::LEFTPAREN: // Если токен открытая скобка
 
                         if (parseString.IsOpenParenthesis()) {
                             isError = false;
@@ -111,7 +112,8 @@ int main()
 
                         break;
 
-                    case RIGHTPAREN: // Если токен закрытая скобка
+                    case (int)TokensKind::RIGHTPAREN: // Если токен закрытая
+                                                      // скобка
                         if (parseString.IsCloseParenthesis()) {
                             isError = false;
                         } else {
@@ -121,7 +123,7 @@ int main()
                         }
                         break;
 
-                    case COMMA: // Если токен запятая
+                    case (int)TokensKind::COMMA: // Если токен запятая
                         if (parseString.IsComma()) {
                             isError = false;
                         } else {
@@ -131,7 +133,7 @@ int main()
                         }
                         break;
 
-                    case NUMBER: // Если токен число
+                    case (int)TokensKind::NUMBER: // Если токен число
 
                         if (parseString.FindDigital()) {
                             if (parseString.FindNumber() == 0) {
