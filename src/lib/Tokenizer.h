@@ -17,7 +17,12 @@
 //    им можно дать суффикс -inl (от inline).
 //       #include <lib/Tokenizer-inl.h>
 
-enum TokensEnum { TOKEN01 = 101, TOKEN02, TOKEN03, TOKEN04, TOKEN05, TOKEN06 };
+// enum создает группу глобальных констант.
+//
+// enum class TokenKind { LeftParen, ... };
+// Использование: TokenKind::LeftParen.
+
+enum TokensKind { LEFTPAREN = 0, RIGHTPAREN, MINUS, COMMA, NUMBER, DOT };
 
 template <std::size_t SIZE>
 
@@ -27,22 +32,22 @@ void Tokenizer(
 {
     for (int i = 0; i < (int)tokens.size(); i++) {
         if (tokens[i] == "(")
-            idTokens[i] = TOKEN01;
+            idTokens[i] = LEFTPAREN;
 
         if (tokens[i] == ")")
-            idTokens[i] = TOKEN02;
+            idTokens[i] = RIGHTPAREN;
 
         if (tokens[i] == "-")
-            idTokens[i] = TOKEN03;
+            idTokens[i] = MINUS;
 
         if (tokens[i] == ",")
-            idTokens[i] = TOKEN04;
+            idTokens[i] = COMMA;
 
         if (tokens[i] == "number")
-            idTokens[i] = TOKEN05;
+            idTokens[i] = NUMBER;
 
         if (tokens[i] == ".")
-            idTokens[i] = TOKEN06;
+            idTokens[i] = DOT;
     }
 }
 
