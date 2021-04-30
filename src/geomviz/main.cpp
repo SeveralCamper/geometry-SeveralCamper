@@ -2,12 +2,12 @@
 #include <cmath>
 #include <vector>
 
-#include "Tokenizer.h"
 #include "CirclePandS.h"
-#include "TrianglePandS.h"
-#include "length.h"
 #include "ShowCoordinatesCircle.h"
 #include "ShowCoordinatesTriangle.h"
+#include "Tokenizer.h"
+#include "TrianglePandS.h"
+#include "length.h"
 
 #define _USE_MATH_DEFINES
 
