@@ -43,9 +43,9 @@ public:
     // Метод возвращающий истину если ключевое слово совпало
     bool IsEqualsKeyWord(const std::string& keyWord) const
     {
-        if (this->Equals(keyWord, stringInputUser.substr(0, indexStr)))
-            return true;
-        return false;
+        return (this->Equals(keyWord, stringInputUser.substr(0, indexStr)));
+           // return true;
+        //return false;
     }
 
     // Если сивол - цифра
