@@ -1,7 +1,7 @@
 all:bin/main
-bin/main: obj/main.o obj/lib/geometrylib.a 
-	g++ obj/main.o -Wall -Werror -L. obj/lib/geometrylib.a -o $@
-obj/main.o:src/geomviz/main.cpp obj/lib/geometrylib.a
+bin/main: obj/main.o obj/lib/geometrylib.a obj/lib/parsestringlib.a
+	g++ obj/main.o -Wall -Werror -L. obj/lib/geometrylib.a -L. obj/lib/parsestringlib.a -o $@
+obj/main.o:src/geomviz/main.cpp obj/lib/geometrylib.a obj/lib/parsestringlib.a
 	g++ -c src/geomviz/main.cpp -include src/lib/ParseString.h -include src/lib/Tokenizer.h -I src/lib -Wall -Werror -o obj/main.o
 
 obj/src/CirclePandS.o:src/lib/CirclePandS.cpp
@@ -19,7 +19,13 @@ obj/src/ShowCoordinatesCircle.o:src/lib/ShowCoordinatesCircle.cpp
 obj/src/ShowCoordinatesTriangle.o:src/lib/ShowCoordinatesTriangle.cpp
 	g++ -c src/lib/ShowCoordinatesTriangle.cpp -Wall -Werror -o $@
 
+obj/src/ToLower.o:src/lib/ToLower.cpp
+	g++ -c src/lib/ToLower.cpp -Wall -Werror -o $@
+	
 obj/lib/geometrylib.a:obj/src/CirclePandS.o obj/src/length.o obj/src/TrianglePandS.o obj/src/ShowCoordinatesCircle.o obj/src/ShowCoordinatesTriangle.o
+	ar rcs $@ $^
+
+obj/lib/parsestringlib.a:obj/src/ToLower.o
 	ar rcs $@ $^
 	
 run:

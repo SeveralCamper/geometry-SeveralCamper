@@ -19,16 +19,7 @@ public:
     int indexStr = 0;
 
     // Метод для преобразования букв к нижнему регистру
-    std::string ToLower(std::string str)
-    {
-        for (int index = 0; index < ((int)str.length()); index++) {
-            if ((int)str[index] > 64 && (int)str[index] < 91) {
-                str[index] += 32;
-            }
-        }
-
-        return str;
-    }
+    std::string ToLower(std::string str);
 
     // Проверка на символ отличный от буквы
     bool IsNotChar(int index)
