@@ -2,9 +2,7 @@
 #define TOKENIZER_H_
 
 #include <array>
-#include <cmath>
 #include <iostream>
-#include <vector>
 
 // Шаблоны не поддерживают раздельную компиляцию.
 // Варианты:

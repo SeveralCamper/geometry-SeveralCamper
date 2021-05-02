@@ -1,7 +1,6 @@
 #ifndef LENGTH_H_
 #define LENGTH_H_
 
-#include <array>
 #include <cmath>
 #include <vector>
 

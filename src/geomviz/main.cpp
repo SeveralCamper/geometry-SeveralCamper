@@ -1,14 +1,14 @@
 #include <array>
 #include <cmath>
-#include <vector>
 #include <iostream>
+#include <vector>
 
 #include "CirclePandS.h"
 #include "ShowCoordinatesCircle.h"
 #include "ShowCoordinatesTriangle.h"
+#include "Tokenizer.h"
 #include "TrianglePandS.h"
 #include "length.h"
-#include "Tokenizer.h"
 
 #define _USE_MATH_DEFINES
 
@@ -113,7 +113,7 @@ int main()
                         break;
 
                     case 102: // Если токен закрытая
-                                                      // скобка
+                              // скобка
                         if (parseString.IsCloseParenthesis()) {
                             isError = false;
                         } else {
