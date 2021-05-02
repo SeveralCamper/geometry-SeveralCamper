@@ -33,7 +33,7 @@ int main()
                "number",
                ")"};
 
-    std::array<int, 10> tokensList = {};
+    std::array<TokensKind, 10> tokensList = {};
 
     // введенная пользователем строка
     std::string inputString;
@@ -44,8 +44,6 @@ int main()
     std::string keyShow = "";
     std::cout << "Введите количество фигур\n";
     std::cin >> count;
-    std::cin.clear();
-    fflush(stdin);
     for (int i = 0; i < count + 1; i++) {
         std::vector<int> collectionCoordinates;
         if (i != 0)
@@ -100,7 +98,7 @@ int main()
                 if (!isError) {
                     /// Переходим на Ключ при определенном токене
                     switch (tokensList[i]) {
-                    case 101: // Если токен открытая скобка
+                    case TokensKind::LEFTPAREN: // Если токен открытая скобка
 
                         if (parseString.IsOpenParenthesis()) {
                             isError = false;
@@ -112,7 +110,7 @@ int main()
 
                         break;
 
-                    case 102: // Если токен закрытая
+                    case TokensKind::RIGHTPAREN: // Если токен закрытая
                               // скобка
                         if (parseString.IsCloseParenthesis()) {
                             isError = false;
@@ -123,7 +121,7 @@ int main()
                         }
                         break;
 
-                    case 104: // Если токен запятая
+                    case TokensKind::COMMA: // Если токен запятая
                         if (parseString.IsComma()) {
                             isError = false;
                         } else {
@@ -133,7 +131,7 @@ int main()
                         }
                         break;
 
-                    case 105: // Если токен число
+                    case TokensKind::NUMBER: // Если токен число
 
                         if (parseString.FindDigital()) {
                             if (parseString.FindNumber() == 0) {

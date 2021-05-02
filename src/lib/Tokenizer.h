@@ -1,5 +1,5 @@
-#ifndef TOKENIZER_H_
-#define TOKENIZER_H_
+#ifndef TOKENIZERH
+#define TOKENIZERH
 
 #include <array>
 #include <iostream>
@@ -20,30 +20,32 @@
 // enum class TokenKind { LeftParen, ... };
 // Использование: TokenKind::LeftParen.
 
+enum class TokensKind { LEFTPAREN = 10, RIGHTPAREN, MINUS, COMMA, NUMBER, DOT };
+
 template <std::size_t SIZE>
 
 void Tokenizer(
         const std::array<std::string, SIZE>& tokens,
-        std::array<int, 10>& idTokens)
+        std::array<TokensKind, 10>& idTokens)
 {
     for (int i = 0; i < (int)tokens.size(); i++) {
         if (tokens[i] == "(")
-            idTokens[i] = 101;
+            idTokens[i] = TokensKind::LEFTPAREN;
 
         if (tokens[i] == ")")
-            idTokens[i] = 102;
+            idTokens[i] = TokensKind::RIGHTPAREN;
 
         if (tokens[i] == "-")
-            idTokens[i] = 103;
+            idTokens[i] = TokensKind::MINUS;
 
         if (tokens[i] == ",")
-            idTokens[i] = 104;
+            idTokens[i] = TokensKind::COMMA;
 
         if (tokens[i] == "number")
-            idTokens[i] = 105;
+            idTokens[i] = TokensKind::NUMBER;
 
         if (tokens[i] == ".")
-            idTokens[i] = 106;
+            idTokens[i] = TokensKind::DOT;
     }
 }
 
