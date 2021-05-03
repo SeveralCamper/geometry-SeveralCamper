@@ -111,7 +111,7 @@ int main()
                         break;
 
                     case TokensKind::RIGHTPAREN: // Если токен закрытая
-                              // скобка
+                                                 // скобка
                         if (parseString.IsCloseParenthesis()) {
                             isError = false;
                         } else {

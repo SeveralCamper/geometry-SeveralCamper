@@ -33,7 +33,7 @@ public:
     // Проверка на пробел
     // Если пробел - true, если нет то false
     bool IsWhitespace(int index);
- 
+
     // Открытая скобка или нет
     bool IsOpenParenthesis();
 
