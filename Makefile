@@ -21,11 +21,45 @@ obj/src/ShowCoordinatesTriangle.o:src/lib/ShowCoordinatesTriangle.cpp
 
 obj/src/ToLower.o:src/lib/ToLower.cpp
 	g++ -c src/lib/ToLower.cpp -Wall -Werror -o $@
+
+obj/src/IsNotChar.o:src/lib/IsNotChar.cpp
+	g++ -c src/lib/IsNotChar.cpp -Wall -Werror -o $@
+
+obj/src/IsEqualsKeyWord.o:src/lib/IsEqualsKeyWord.cpp
+	g++ -c src/lib/IsEqualsKeyWord.cpp -Wall -Werror -o $@
 	
+obj/src/IsDigitalSymbol.o:src/lib/IsDigitalSymbol.cpp
+	g++ -c src/lib/IsDigitalSymbol.cpp -Wall -Werror -o $@
+
+obj/src/IsWhiteSpace.o:src/lib/IsWhiteSpace.cpp
+	g++ -c src/lib/IsWhiteSpace.cpp -Wall -Werror -o $@
+
+obj/src/IsOpenParenthesis.o:src/lib/IsOpenParenthesis.cpp
+	g++ -c src/lib/IsOpenParenthesis.cpp -Wall -Werror -o $@
+
+obj/src/IsCloseParenthesis.o:src/lib/IsCloseParenthesis.cpp
+	g++ -c src/lib/IsCloseParenthesis.cpp -Wall -Werror -o $@
+		
+obj/src/IsComma.o:src/lib/IsComma.cpp
+	g++ -c src/lib/IsComma.cpp -Wall -Werror -o $@
+
+obj/src/FindFirstCharDifferentFrom.o:src/lib/FindFirstCharDifferentFrom.cpp
+	g++ -c src/lib/FindFirstCharDifferentFrom.cpp -Wall -Werror -o $@
+
+obj/src/Equals.o:src/lib/Equals.cpp
+	g++ -c src/lib/Equals.cpp -Wall -Werror -o $@
+
+obj/src/SetString.o:src/lib/SetString.cpp
+	g++ -c src/lib/SetString.cpp -Wall -Werror -o $@
+		
+obj/src/SubStr.o:src/lib/SubStr.cpp
+	g++ -c src/lib/SubStr.cpp -Wall -Werror -o $@
+
 obj/lib/geometrylib.a:obj/src/CirclePandS.o obj/src/length.o obj/src/TrianglePandS.o obj/src/ShowCoordinatesCircle.o obj/src/ShowCoordinatesTriangle.o
 	ar rcs $@ $^
 
-obj/lib/parsestringlib.a:obj/src/ToLower.o
+obj/lib/parsestringlib.a:obj/src/ToLower.o obj/src/IsNotChar.o obj/src/IsEqualsKeyWord.o obj/src/IsDigitalSymbol.o obj/src/IsWhiteSpace.o obj/src/IsOpenParenthesis.o 
+obj/lib/parsestringlib.a:obj/src/IsCloseParenthesis.o obj/src/IsComma.o obj/src/FindFirstCharDifferentFrom.o obj/src/Equals.o obj/src/SetString.o obj/src/SubStr.o
 	ar rcs $@ $^
 	
 run:

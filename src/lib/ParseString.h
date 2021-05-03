@@ -22,110 +22,37 @@ public:
     std::string ToLower(std::string str);
 
     // Проверка на символ отличный от буквы
-    bool IsNotChar(int index)
-    {
-        // Если символ отличный от буквы
-        if (((int)stringInputUser[index] > 91
-             && (int)stringInputUser[index] < 96)
-            || (int)stringInputUser[index] < 64
-            || (int)stringInputUser[index] > 123)
-            return true;
-
-        return false;
-    }
+    bool IsNotChar(int index);
 
     // Метод возвращающий истину если ключевое слово совпало
-    bool IsEqualsKeyWord(std::string keyWord)
-    {
-        if (this->Equals(keyWord, stringInputUser.substr(0, indexStr)))
-            return true;
-        return false;
-    }
+    bool IsEqualsKeyWord(std::string keyWord);
 
     // Если сивол - цифра
-    bool IsDigitalSymbol(int index)
-    {
-        if ((int)stringInputUser[index] > 47
-            && (int)stringInputUser[index] < 59)
-            return true;
-        return false;
-    }
+    bool IsDigitalSymbol(int index);
 
     // Проверка на пробел
     // Если пробел - true, если нет то false
-    bool IsWhitespace(int index)
-    {
-        return ((int)stringInputUser[index] == 32);
-    }
-
+    bool IsWhitespace(int index);
+ 
     // Открытая скобка или нет
-    bool IsOpenParenthesis()
-    {
-        /// Поскольку следом за ключевым словом
-        /// должна следовать открытая круглая скобка,
-        /// проверим ее присутствие.
-        // Если скобка отсутствует, то укажем на ошибку
-        return stringInputUser[indexStr] == '(';
-    }
+    bool IsOpenParenthesis();
 
     // Функция проверки введенной открытой скобки
-    bool IsCloseParenthesis()
-    {
-        /// Завершаемым символом конструкции должна быть закрытая круглая скобка
-        // Если скобка отсутствует, то укажем на ошибку
-        return stringInputUser[indexStr + 1] == ')' ? true : false;
-    }
+    bool IsCloseParenthesis();
 
     // Метод ищет запятую
-    bool IsComma()
-    {
-        // Ищем запятую.
-        for (int index = indexStr + 1; index < ((int)stringInputUser.length());
-             index++) {
-            if (!IsWhitespace(index)) {
-                if (stringInputUser[index] == ',') {
-                    indexStr = index;
-                    return true;
-                } else {
-                    indexStr = index;
-                    return false;
-                }
-            }
-        }
-
-        return false;
-    }
+    bool IsComma();
 
     // Метод который ищет первый символ не совпадающий с буквой
-    void FindFirstCharDifferentFrom()
-    {
-        for (int i = 0; i < ((int)stringInputUser.length()); i++) {
-            // Если получили символ отличный от буквы
-            if (IsNotChar(i)) {
-                // Запоминаем индекс, на котором остановились
-                indexStr = i;
-
-                // И выходим из цикла
-                break;
-            }
-        }
-    }
+    void FindFirstCharDifferentFrom();
 
     // Метод сравнения двух строк
     // В данном случае не просто сравнивает ,
     // а еще преобразует к единому регистру
-    bool Equals(std::string str_1, std::string str_2)
-    {
-        if (ToLower(str_1) == ToLower(str_2))
-            return true;
-        return false;
-    }
+    bool Equals(std::string str_1, std::string str_2);
 
     // Метод устанавливающий в поле stringInputUser введную строку пользователя
-    void SetString(std::string str)
-    {
-        stringInputUser = str;
-    }
+    void SetString(std::string str);
 
     // Вернуть длину строки
     int Lenght()
@@ -134,10 +61,7 @@ public:
     }
 
     // Возвращает часть строки
-    std::string SubStr(int startPos, int endPos)
-    {
-        return stringInputUser.substr(startPos, endPos);
-    }
+    std::string SubStr(int startPos, int endPos);
 
     // Возвращает индекс символа
     int GetIndex()
