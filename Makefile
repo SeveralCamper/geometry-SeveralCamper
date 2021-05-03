@@ -55,11 +55,27 @@ obj/src/SetString.o:src/lib/SetString.cpp
 obj/src/SubStr.o:src/lib/SubStr.cpp
 	g++ -c src/lib/SubStr.cpp -Wall -Werror -o $@
 
+obj/src/GetIndex.o:src/lib/GetIndex.cpp
+	g++ -c src/lib/GetIndex.cpp -Wall -Werror -o $@
+
+obj/src/Lenght.o:src/lib/Lenght.cpp
+	g++ -c src/lib/Lenght.cpp -Wall -Werror -o $@
+
+obj/src/FindDigital.o:src/lib/FindDigital.cpp
+	g++ -c src/lib/FindDigital.cpp -Wall -Werror -o $@
+
+obj/src/FindNumber.o:src/lib/FindNumber.cpp
+	g++ -c src/lib/FindNumber.cpp -Wall -Werror -o $@
+
+obj/src/StrToInt.o:src/lib/StrToInt.cpp
+	g++ -c src/lib/StrToInt.cpp -Wall -Werror -o $@
+
 obj/lib/geometrylib.a:obj/src/CirclePandS.o obj/src/length.o obj/src/TrianglePandS.o obj/src/ShowCoordinatesCircle.o obj/src/ShowCoordinatesTriangle.o
 	ar rcs $@ $^
 
 obj/lib/parsestringlib.a:obj/src/ToLower.o obj/src/IsNotChar.o obj/src/IsEqualsKeyWord.o obj/src/IsDigitalSymbol.o obj/src/IsWhiteSpace.o obj/src/IsOpenParenthesis.o 
 obj/lib/parsestringlib.a:obj/src/IsCloseParenthesis.o obj/src/IsComma.o obj/src/FindFirstCharDifferentFrom.o obj/src/Equals.o obj/src/SetString.o obj/src/SubStr.o
+obj/lib/parsestringlib.a:obj/src/GetIndex.o obj/src/Lenght.o obj/src/FindDigital.o obj/src/FindNumber.o obj/src/StrToInt.o
 	ar rcs $@ $^
 	
 run:
