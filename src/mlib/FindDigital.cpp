@@ -6,13 +6,8 @@ bool ParseString::FindDigital()
     for (int index = indexStr + 1; index < ((int)stringInputUser.length());
          index++) {
         if (!IsWhitespace(index)) {
-            if (IsDigitalSymbol(index)) {
-                indexStr = index;
-                return true;
-            } else {
-                indexStr = index;
-                return false;
-            }
+            indexStr = index;
+            return (IsDigitalSymbol(index)); 
         }
     }
 
