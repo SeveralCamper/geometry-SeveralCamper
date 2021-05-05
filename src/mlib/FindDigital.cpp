@@ -7,7 +7,7 @@ bool ParseString::FindDigital()
          index++) {
         if (!IsWhitespace(index)) {
             indexStr = index;
-            return (IsDigitalSymbol(index)); 
+            return (IsDigitalSymbol(index));
         }
     }
 
