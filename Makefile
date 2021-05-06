@@ -12,7 +12,7 @@ LIBOBJ := $(patsubst src/lib/%.cpp, obj/src/%.o, $(LIBSOURCES))
 LIB := obj/lib/geometrylib.a
 
 MLIBOBJ := $(patsubst src/mlib/%.cpp, obj/src/%.o, $(LIBMSOURCES))
-MLIB := obj/mlib/parsestringmlib.a -L. src/mlib/ParseString.h
+MLIB := obj/mlib/parsestringmlib.a 
 
 OBJ := $(patsubst src/geomviz/%.cpp, obj/src/%.o, $(SOURCES))
 

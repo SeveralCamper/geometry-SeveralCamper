@@ -3,12 +3,13 @@
 #include <iostream>
 #include <vector>
 
-#include "CirclePandS.h"
-#include "ShowCoordinatesCircle.h"
-#include "ShowCoordinatesTriangle.h"
-#include "Tokenizer.h"
-#include "TrianglePandS.h"
-#include "length.h"
+#include "lib/CirclePandS.h"
+#include "lib/ShowCoordinatesCircle.h"
+#include "lib/ShowCoordinatesTriangle.h"
+#include "lib/Tokenizer.h"
+#include "lib/TrianglePandS.h"
+#include "lib/length.h"
+#include "mlib/ParseString.h"
 
 #define _USE_MATH_DEFINES
 
