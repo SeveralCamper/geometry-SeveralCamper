@@ -4,12 +4,12 @@
 #include <vector>
 
 #include "CirclePandS.h"
+#include "ParseString.h"
 #include "ShowCoordinatesCircle.h"
 #include "ShowCoordinatesTriangle.h"
 #include "Tokenizer.h"
 #include "TrianglePandS.h"
 #include "length.h"
-#include "ParseString.h"
 
 #define _USE_MATH_DEFINES
 
