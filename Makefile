@@ -4,7 +4,7 @@ CXX := g++
 
 TARGET := bin/main
 
-SOURCES := $(wildcard src/*.cpp)
+SOURCES := $(wildcard src/geomviz/*.cpp)
 LIBSOURCES := $(wildcard src/lib/*.cpp)
 LIBMSOURCES := $(wildcard src/mlib/*.cpp)
 
@@ -19,7 +19,7 @@ OBJ := $(patsubst src/geomviz/%.cpp, obj/src/%.o, $(SOURCES))
 all:$(TARGET)
 
 $(TARGET): $(OBJ) $(LIB) $(MLIB)
-	$(CXX) $(CFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJ) -L. $(LIB) $(MLIB)
+	$(CXX) $(CFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJ) -L. $(LIB) $(MLIB) -I src/lib -I src/mlib
 
 $(LIB): $(LIBOBJ)
 	ar rcs $@ $^
@@ -28,13 +28,13 @@ $(MLIB): $(MLIBOBJ)
 	ar rcs $@ $^
 
 obj/src/%.o: src/lib/%.cpp
-	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ -I src/lib -I src/mlib
 
 obj/src/%.o: src/mlib/%.cpp
-	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ -I src/lib -I src/mlib
 
-obj/src/%.o: src/%.cpp
-	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@  
+obj/src/%.o: src/geomviz/%.cpp
+	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ -I src/lib -I src/mlib
 		
 run: $(TARGET)
 	./$(TARGET)
