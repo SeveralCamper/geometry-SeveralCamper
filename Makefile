@@ -19,7 +19,7 @@ OBJ := $(patsubst src/geomviz/%.cpp, obj/src/%.o, $(SOURCES))
 all:$(TARGET)
 
 $(TARGET): $(OBJ) $(LIB) $(MLIB)
-	$(CXX) $(CFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJ) -L. $(LIB) $(MLIB) -I src/lib -I src/mlib
+	$(CXX) $(CFLAGS) $(CPPFLAGS) -o $(TARGET) $(OBJ) -L. $(LIB) $(MLIB) 
 
 $(LIB): $(LIBOBJ)
 	ar rcs $@ $^
