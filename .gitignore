@@ -2,3 +2,5 @@
 main
 *.o
 .build.yml.swp 
+*.json
+[Vv]code/

@@ -6,15 +6,13 @@
 // строкой
 class ParseString {
 private:
-    //Скрыл поле пользовательской строки от изменения вне класса
-    // Строка введенная пользователем
-
-    std::string stringInputUser;
-
     //Строка хранящая число
     std::string stringNumber;
 
 public:
+    // Строка введенная пользователем
+    std::string stringInputUser;
+
     // Хранит индекс строки
     int indexStr = 0;
 
