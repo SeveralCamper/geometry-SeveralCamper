@@ -24,7 +24,7 @@ int main()
     /// Набор токенов для Треугольника
     std::array<std::string, 10> tokensTriangle
             = {"(",
-               "number",
+               "number",    
                "number",
                ",",
                "number",
