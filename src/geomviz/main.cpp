@@ -216,7 +216,8 @@ int main()
             if (collectionCircle[i].ID != collectionCircle[j].ID)
                 if (AreCirclesIntersecting(
                             collectionCircle[i], collectionCircle[j]))
-                    ShowIntersectShapes(collectionCircle[j].ID, collectionCircle[j].key);
+                    ShowIntersectShapes(
+                            collectionCircle[j].ID, collectionCircle[j].key);
         }
     }
 

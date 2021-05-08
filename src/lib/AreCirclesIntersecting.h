@@ -1,5 +1,6 @@
 #ifndef ARE_CIRCLES_INTERSECTING_H_
 #define ARE_CIRCLES_INTERSECTING_H_
+
 #include "CircleShape.h"
 #include <cmath>
 #include <iostream>
