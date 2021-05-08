@@ -1,8 +1,10 @@
 #include "ShowCoordinatesTriangle.h"
 
-void ShowCoordinatesTriangle(const std::vector<int>& coordinates)
+void ShowCoordinatesTriangle(const TriangleShape coordinates)
 {
-    std::cout << "\ntriangle(" << coordinates[0] << " " << coordinates[1]
-              << ", " << coordinates[2] << " " << coordinates[3] << ", "
-              << coordinates[4] << " " << coordinates[5] << ")\n";
+    std::cout << ">------------------------------<" << std::endl;
+
+    std::cout << "triangle(" << coordinates.x1 << " " << coordinates.y1 << ", "
+              << coordinates.x2 << " " << coordinates.y2 << ", "
+              << coordinates.x3 << " " << coordinates.y3 << ")" << std::endl;
 }

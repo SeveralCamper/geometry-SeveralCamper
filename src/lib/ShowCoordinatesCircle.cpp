@@ -1,7 +1,9 @@
 #include "ShowCoordinatesCircle.h"
 
-void ShowCoordinatesCircle(const std::vector<int>& coordinates)
+void ShowCoordinatesCircle(const CircleShape coordinates)
 {
-    std::cout << "\ncircle(" << coordinates[0] << " " << coordinates[1] << ", "
-              << coordinates[2] << ")\n";
+    std::cout << ">------------------------------<" << std::endl;
+
+    std::cout << "circle(" << coordinates.x << " " << coordinates.y << ", "
+              << coordinates.r << ")" << std::endl;
 }

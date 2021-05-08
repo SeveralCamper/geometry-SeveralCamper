@@ -4,11 +4,13 @@
 #include <vector>
 
 #include "CirclePandS.h"
+#include "CircleShape.h"
 #include "ParseString.h"
 #include "ShowCoordinatesCircle.h"
 #include "ShowCoordinatesTriangle.h"
 #include "Tokenizer.h"
 #include "TrianglePandS.h"
+#include "TriangleShape.h"
 #include "length.h"
 
 #define _USE_MATH_DEFINES
@@ -43,7 +45,12 @@ int main()
     ParseString parseString;
 
     std::string keyShow = "";
+
     std::vector<int> collectionCoordinates;
+
+    std::vector<CircleShape> collectionCircle;
+    std::vector<TriangleShape> collectionTriangle;
+
     std::cout << "Введите строку(и) с названием фигуры и ее параметрами \n";
 
     do {
@@ -92,7 +99,7 @@ int main()
             std::cout << "Ошибка в ключевом слове!" << std::endl;
         }
 
-        if (!isError) {
+        if (!isError && parseString.stringInputUser != "") {
             for (int i = 0; i < (int)tokensList.size(); i++) {
                 // Если ошибок не было
                 if (!isError) {
@@ -167,23 +174,47 @@ int main()
                     default:
                         break;
                     }
+
                 } else {
                     break;
                 }
             }
+
+            if (!isError) {
+                if (keyShow == "circle") {
+                    CircleShape circle;
+                    circle.Set(collectionCoordinates);
+
+                    collectionCircle.push_back(circle);
+                }
+
+                if (keyShow == "triangle") {
+                    TriangleShape triangle;
+                    triangle.Set(collectionCoordinates);
+
+                    collectionTriangle.push_back(triangle);
+                }
+            }
+
+            collectionCoordinates.clear();
         }
 
     } while (inputString != "");
 
-    if (keyShow == "circle") {
-        ShowCoordinatesCircle(collectionCoordinates);
-        CirclePandS(collectionCoordinates);
+    std::cout << "+------------------------------+" << std::endl;
+    std::cout << "Конец ввода" << std::endl << std::endl;
+
+    for (int i = 0; i < (int)collectionCircle.size(); i++) {
+        ShowCoordinatesCircle(collectionCircle[i]);
+        CirclePandS(collectionCircle[i]);
     }
 
-    if (keyShow == "triangle") {
-        ShowCoordinatesTriangle(collectionCoordinates);
-        TrianglePandS(collectionCoordinates);
+    for (int i = 0; i < (int)collectionTriangle.size(); i++) {
+        ShowCoordinatesTriangle(collectionTriangle[i]);
+        TrianglePandS(collectionTriangle[i]);
     }
+
+    std::cout << std::endl;
 
     return 0;
 }

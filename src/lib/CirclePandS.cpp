@@ -2,9 +2,9 @@
 
 #define _USE_MATH_DEFINES
 
-void CirclePandS(const std::vector<int>& coordinates)
+void CirclePandS(const CircleShape coordinates)
 {
-    double p = coordinates[2] * 2 * M_PI;
-    double s = coordinates[2] * coordinates[2] * M_PI;
+    double p = coordinates.r * 2 * M_PI;
+    double s = coordinates.r * coordinates.r * M_PI;
     std::cout << "Perimeter is " << p << "\nSquare is " << s << std::endl;
 }
