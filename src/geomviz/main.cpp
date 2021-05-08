@@ -9,6 +9,7 @@
 #include "ParseString.h"
 #include "ShowCoordinatesCircle.h"
 #include "ShowCoordinatesTriangle.h"
+#include "ShowIntersectShapes.h"
 #include "Tokenizer.h"
 #include "TrianglePandS.h"
 #include "TriangleShape.h"
@@ -182,7 +183,7 @@ int main()
             }
 
             IDShape++;
-            
+
             if (!isError) {
                 if (keyShow == "circle") {
                     CircleShape circle;
@@ -210,18 +211,19 @@ int main()
     for (int i = 0; i < (int)collectionCircle.size(); i++) {
         ShowCoordinatesCircle(collectionCircle[i]);
         CirclePandS(collectionCircle[i]);
+
+        for (int j = 0; j < (int)collectionCircle.size(); j++) {
+            if (collectionCircle[i].ID != collectionCircle[j].ID)
+                if (AreCirclesIntersecting(
+                            collectionCircle[i], collectionCircle[j]))
+                    ShowIntersectShapes(collectionCircle[j].ID, collectionCircle[j].key);
+        }
     }
 
     for (int i = 0; i < (int)collectionTriangle.size(); i++) {
         ShowCoordinatesTriangle(collectionTriangle[i]);
         TrianglePandS(collectionTriangle[i]);
     }
-
-     for (int i = 0; i < (int)collectionCircle.size(); i++) {
-        for (int j = 1; j < (int)collectionCircle.size(); j++) {
-            AreCirclesIntersecting (collectionCircle[i], collectionCircle[j]);
-        }
-    } 
 
     std::cout << std::endl;
 
