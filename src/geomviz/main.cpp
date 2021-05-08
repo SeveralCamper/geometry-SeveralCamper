@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+#include "AreCirclesIntersecting.h"
 #include "CirclePandS.h"
 #include "CircleShape.h"
 #include "ParseString.h"
@@ -17,7 +18,7 @@
 
 int main()
 {
-    // Массив содержащий координаты фигуры
+    int IDShape = 0;
 
     /// Набор токенов для Круга
     std::array<std::string, 6> tokensCircle
@@ -180,18 +181,20 @@ int main()
                 }
             }
 
+            IDShape++;
+            
             if (!isError) {
                 if (keyShow == "circle") {
                     CircleShape circle;
                     circle.Set(collectionCoordinates);
-
+                    circle.ID = IDShape;
                     collectionCircle.push_back(circle);
                 }
 
                 if (keyShow == "triangle") {
                     TriangleShape triangle;
                     triangle.Set(collectionCoordinates);
-
+                    triangle.ID = IDShape;
                     collectionTriangle.push_back(triangle);
                 }
             }
@@ -213,6 +216,12 @@ int main()
         ShowCoordinatesTriangle(collectionTriangle[i]);
         TrianglePandS(collectionTriangle[i]);
     }
+
+     for (int i = 0; i < (int)collectionCircle.size(); i++) {
+        for (int j = 1; j < (int)collectionCircle.size(); j++) {
+            AreCirclesIntersecting (collectionCircle[i], collectionCircle[j]);
+        }
+    } 
 
     std::cout << std::endl;
 

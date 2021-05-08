@@ -14,6 +14,7 @@ public:
     int y2;
     int x3;
     int y3;
+    int ID;
 
     std::string key = "triangle";
 

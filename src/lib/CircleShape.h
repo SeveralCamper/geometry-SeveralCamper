@@ -11,6 +11,7 @@ public:
     int x;
     int y;
     int r;
+    int ID;
 
     std::string key = "circle";
 
