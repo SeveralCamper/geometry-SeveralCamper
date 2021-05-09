@@ -16,8 +16,8 @@ MLIB := obj/mlib/parsestringmlib.a
 
 OBJ := $(patsubst src/geomviz/%.cpp, obj/src/%.o, $(SOURCES))
 
-TEST := $(wildcard test/geometryLibCheck/*.cpp) 
-TESTOBJ := $(patsubst test/geometryLibCheck/%.cpp, obj/test/%.o, $(TEST))
+TEST := $(wildcard test/*.cpp) 
+TESTOBJ := $(patsubst test/%.cpp, obj/test/%.o, $(TEST))
 TESTTARGET := bin/geometry-test
 CTEST := thirdparty/ctest.h
 
@@ -47,7 +47,7 @@ test: $(TESTTARGET)
 $(TESTTARGET): $(TESTOBJ) $(CTEST) $(LIB) $(MLIB)
 	$(CXX) $(CPPFLAGS) $(CFLAGS)  $(TESTOBJ) -o $@ -L. $(LIB) $(MLIB) -I src/lib -I src/mlib -I thirdparty
 
-obj/test/%.o: test/geometryLibCheck/%.cpp $(CTEST)
+obj/test/%.o: test/%.cpp $(CTEST)
 	$(CXX) $(CPPFLAGS) $(CFLAGS) -c  $< -o $@ -I src/lib -I src/mlib -I thirdparty
 		
 run: $(TARGET)
