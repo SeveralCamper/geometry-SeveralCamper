@@ -1,5 +1,5 @@
-#ifndef TOKENIZERH
-#define TOKENIZERH
+#ifndef TOKENIZER_H_
+#define TOKENIZER_H_
 
 #include <array>
 #include <iostream>
