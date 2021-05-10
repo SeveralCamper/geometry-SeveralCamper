@@ -33,10 +33,10 @@ public:
     bool IsWhitespace(int index);
 
     // Открытая скобка или нет
-    bool IsOpenParenthesis();
+    bool IsOpenParenthesis(int index);
 
     // Функция проверки введенной закрытой скобки
-    bool IsCloseParenthesis();
+    bool IsCloseParenthesis(int index);
 
     // Метод ищет запятую
     bool IsComma();

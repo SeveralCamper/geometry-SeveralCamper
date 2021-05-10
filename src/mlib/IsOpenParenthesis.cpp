@@ -1,10 +1,10 @@
 #include "ParseString.h"
 
-bool ParseString::IsOpenParenthesis()
+bool ParseString::IsOpenParenthesis(int index)
 {
     /// Поскольку следом за ключевым словом
     /// должна следовать открытая круглая скобка,
     /// проверим ее присутствие.
     // Если скобка отсутствует, то укажем на ошибку
-    return stringInputUser[indexStr] == '(';
+    return stringInputUser[index] == '(';
 }

@@ -53,6 +53,8 @@ int main()
     std::vector<CircleShape> collectionCircle;
     std::vector<TriangleShape> collectionTriangle;
 
+    std::cout << "\033[H\033[J";
+
     std::cout << "Введите строку(и) с названием фигуры и ее параметрами \n";
 
     do {
@@ -109,7 +111,8 @@ int main()
                     switch (tokensList[i]) {
                     case TokensKind::LEFTPAREN: // Если токен открытая скобка
 
-                        if (parseString.IsOpenParenthesis()) {
+                        if (parseString.IsOpenParenthesis(
+                                    parseString.indexStr)) {
                             isError = false;
                         } else {
                             isError = true;
@@ -121,7 +124,8 @@ int main()
 
                     case TokensKind::RIGHTPAREN: // Если токен закрытая
                                                  // скобка
-                        if (parseString.IsCloseParenthesis()) {
+                        if (parseString.IsCloseParenthesis(
+                                    parseString.indexStr)) {
                             isError = false;
                         } else {
                             isError = true;
@@ -131,6 +135,7 @@ int main()
                         break;
 
                     case TokensKind::COMMA: // Если токен запятая
+
                         if (parseString.IsComma()) {
                             isError = false;
                         } else {
