@@ -44,7 +44,7 @@ obj/src/%.o: src/geomviz/%.cpp
 test: $(TESTTARGET)
 	./$(TESTTARGET)
 
-$(TESTTARGET): $(TESTOBJ) $(CTEST) $(LIB) $(MLIB)
+$(TESTTARGET): $(TESTOBJ) $(LIB) $(MLIB)
 	$(CXX) $(CPPFLAGS) $(CFLAGS)  $(TESTOBJ) -o $@ -L. $(LIB) $(MLIB) -I src/lib -I src/mlib -I thirdparty
 
 obj/test/%.o: test/%.cpp $(CTEST)
